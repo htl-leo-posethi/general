@@ -11,7 +11,12 @@ you will find a complete list of the material we cover in the [syllabus](Syllabu
 
 ## Content
 ### Unit 1 - Organizational
-We will get an overview of the course and fix the organizational framework like quizzes, tests, grading, communication. Details to be found in the [handout](Unit01_Organizational/OrganizationalAndOverviewHandout.pdf).
+We will get an overview of the course and fix the organizational framework like quizzes, tests, grading, communication.
+
+Class material
+
+- [Handout](Unit01_Organizational/OrganizationalAndOverviewHandout.pdf)
+- [Graded Exercise](https://github.com/if-05-22-loal/if.05.22-coding-assignment1)
 
 ### Unit 2 - Basic Propositional Logic
 We will talk about propositions, their compositions, the properties of these compositions and propositional logic formulas. Material to be found:
