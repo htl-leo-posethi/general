@@ -19,7 +19,9 @@ Class material
 - [Graded Exercise](https://github.com/if-05-22-loal/if.05.22-coding-assignment1)
 
 ### Unit 2 - Basic Propositional Logic
-We will talk about propositions, their compositions, the properties of these compositions and propositional logic formulas. Material to be found:
+We will talk about propositions, their compositions, the properties of these compositions and propositional logic formulas.
+
+Class material
 - [Handout](Unit02_BasicPropositionalLogic/Presentation/02_PropositionalLogicBasics_lecture.pdf)
 - [Graded Exercise](Unit02_BasicPropositionalLogic/Exercises/Exercise2.pdf)
 - [More examples](Unit02_BasicPropositionalLogic/Exercises/Exercise2MoreExamples/Exercise2MoreExamples.pdf) as training material for quizzes and tests
