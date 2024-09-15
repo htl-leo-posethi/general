@@ -1,0 +1,261 @@
+\documentclass{beamer}
+%%% BEGIN PREAMBLE
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+% \usepackage{beamerthemesplit} // Activate for custom appearance
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+
+% Definitions
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% Title stuff
+\title{Unit 02 -- Propositional Logic -- Basics}
+\author{Peter Bauer}
+\date{} % delete this line to display the current date
+
+%%% BEGIN DOCUMENT
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+	\frametitle{Outline}
+	\tableofcontents
+\end{frame}
+
+\section{Propositions and Propositional Variable}
+\begin{frame}
+\frametitle{Proposition}
+\begin{itemize}
+	\item Propositions are done in everyday life.
+	\pause
+	\item For propositions it makes sense to ask whether they are ``true'' or ``false''.
+	\pause
+	\item The answer to this question is either ``true'' or ``false'' (nothing in between).
+	\pause
+	\item Example: ``The circuit is electrically conducting.''
+\end{itemize}	
+	
+\end{frame}
+
+\begin{frame}
+\frametitle{Propositional Variable}
+\begin{itemize}
+	\item Instead of propositions we are often talking of {\em propositional variables}
+	\pause
+	\item Expresses that we are not interested in a specific proposition but a variable that can hold arbitrary propositions
+	\pause
+	\item Simplified we can understand propositional variables as variables that hold either the value $t$ or $f$
+	\pause
+	\item Instead of ``Let $A$ be an arbitrary proposition'' we can say ``Let $A$ be a propositional variable''
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Proposition --- Definition}
+\begin{definition}
+A {\em proposition} is a ``linguistic item'' for which it makes sense to ask whether it is ``true'' or ``false''. The terms ``true'' and ``false'' are called the {\em truth values} of a proposition.
+\end{definition}
+
+\pause
+\begin{remark}
+\begin{itemize}
+ 	\item Propositions are mainly denoted by upper case letters $A$, $B$, $C$, \ldots
+	\pause
+	\item  ``true'' is often abbreviated by $t$ and ``false'' by $f$
+	\pause
+	\item We are only interested in the structure of propositions and not in its content.
+\end{itemize}
+
+\end{remark}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Examples}
+ 
+\begin{itemize}
+	\item $x \leq 3$
+	\pause
+	\item In German: Wenn Anastasia den Most holt, wird es bald etwas zu trinken geben, und das Abendessen wird beginnen, vorausgesetzt, dass Bartholomäus das Brot schon gebacken hat.
+\end{itemize}
+\end{frame}
+
+
+\section{Compositions of Propositions}
+\begin{frame}
+\frametitle{Basic Compositions}
+
+\begin{definition}
+Let $A$ and $B$ be two propositions. Then the truth values of the propositions $A \land B$ (``$A$ and $B$''), $A \lor B$ (``$A$ or $B$), and $\lnot A$ (``not $A$'') are given by the following truth table:
+
+
+\begin{tabular}{c|c||c|c|c}
+$A$ & $B$ & $A \land B$ & $A \lor B$ & $\lnot A$ \\ \hline \hline
+$t$ & $t$ & \pause $t$ & $t$ & $f$ \\ \pause
+$t$ & $f$ &  \pause $f$ & $t$ & $f$ \\ \pause
+$f$ & $t$ &  \pause $f$ & $t$ & $t$ \\ \pause
+$f$ & $f$ &  \pause $f$ & $f$ & $t$
+\end{tabular}
+\end{definition}
+
+\pause
+\begin{remark}
+	$\land$ is called {\em conjunction}, $\lor$ is called {\em disjunction} and $\lnot$ is called {\em negation}.
+\end{remark}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Implication}
+\begin{definition}
+Let $A$ and $B$ be two propositions. Then the {\em implication} $A \Rightarrow B$ (``if $A$ then $B$'') is defined by the following truth table:
+\pause
+\begin{tabular}{c|c||c}
+$A$ & $B$ & $A \Rightarrow B$ \\ \hline \hline
+$t$ & $t$  \pause & $t$  \\
+$t$ & $f$ \pause & $f$  \\
+$f$ & $t$ \pause & $t$ \\
+$f$ & $f$ \pause & $t$ 
+\end{tabular}
+
+\end{definition}
+\end{frame}
+
+\begin{frame}
+\frametitle{Equivalence}
+\begin{definition}
+Let $A$ and $B$ be two propositions. Then the {\em equivalence} $A \Leftrightarrow B$ (``$A$ if and only if  $B$'') is defined by the following truth table:
+\pause
+\begin{tabular}{c|c||c}
+$A$ & $B$ & $A \Leftrightarrow B$ \\ \hline \hline
+$t$ & $t$ \pause & $t$  \\
+$t$ & $f$ \pause & $f$  \\
+$f$ & $t$ \pause & $f$ \\
+$f$ & $f$ \pause & $t$ 
+\end{tabular}
+
+\end{definition}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Remarks}
+ 
+\begin{itemize}
+	\item The composition of two propositions is again a proposition
+	\pause
+	\item The compositions are binary, i.e., they have two ``operands''
+	\pause
+	\item By nesting compositions and using parentheses we can construct more complex propositions (more specific propositional formulas)
+	\pause
+	\item To reduce the number of necessary parentheses we use the precedence rules $\lnot$ has higher precedence than $\land$ higher than $\lor$ higher than $\Rightarrow$ higher than $\Leftrightarrow$
+	\pause
+	\item The syntax of the compositions has to be considered, e.g., $\lnot \land AB$ is NO proposition
+\end{itemize}
+\end{frame}
+
+\section{Propositional Formulas}
+\begin{frame}
+\frametitle{Propositional Formula}
+\begin{definition}
+Given a set of propositional variables or propositions $A, B, C, \ldots$. If we combine these propositions by means of the compositions given above, the result of this compositions is called a {\em propositional formula}. If we assign true or false propositions to each of the propositional variables in a propositional formula we get a concrete proposition.
+\end{definition}
+\end{frame}
+
+\begin{frame}
+\frametitle{Equivalence and Implication of Propositional Formulas}
+\begin{definition}
+Let $P = P(A, B, C, \ldots)$ and $Q = Q(A, B, C, \ldots)$ be propositional formulas then
+\begin{enumerate}
+	\item $P$ and $Q$ are called {\em equivalent} ($P \equiv Q$), if $P$ and $Q$ have the same truth value for each possible assignment of their propositional variables
+	\pause
+	\item $P$ {\em implies} $Q$ ($P \vdash Q$) if for each assignment to the propositional variables holds that if $P$ is true then also $Q$ is true.
+\end{enumerate}
+\end{definition}
+\pause
+\begin{remark}
+Very often we loosely interchange the symbols $\equiv$ and $\Leftrightarrow$ as well as $\vdash$ and $\Rightarrow$
+\end{remark}
+\end{frame}
+
+\section{Properties of Compositions}
+\begin{frame}
+\frametitle{Commutativity, Associativity}
+\begin{theorem}
+\begin{enumerate}
+	\item Commutativity	\begin{eqnarray*}
+						A \land B &\equiv &B \land A \\
+						A \lor B &\equiv & B \lor A
+					\end{eqnarray*}
+	\pause
+	\item Associativity	\begin{eqnarray*}
+						A \land (B \land C) & \equiv & (A \land B) \land C \equiv A \land B \land C \\
+						A \lor (B \lor C) & \equiv & (A \lor B) \lor C \equiv A \lor B \lor C 
+					\end{eqnarray*}
+\end{enumerate}
+\end{theorem}
+\end{frame}
+
+\begin{frame}
+\frametitle{Distributivity, De-Morgan}
+\begin{theorem}
+\begin{enumerate}
+	\item Distributivity	\begin{eqnarray*}
+						A \land (B \lor C) & \equiv & (A \land B) \lor (A \land C) \\
+						A \lor (B \land C) & \equiv & (A \lor B) \land (A \lor C) \\
+					\end{eqnarray*}
+	\pause
+	\item De-Morgan	\begin{eqnarray*}
+						\lnot(A \land B) & \equiv & \lnot A \lor \lnot B \\
+						\lnot(A \lor B) & \equiv & \lnot A \land \lnot B
+					\end{eqnarray*}
+\end{enumerate}
+\end{theorem}
+\end{frame}
+
+\begin{frame}
+\frametitle{Absorption, Idempotence}
+\begin{theorem}
+\begin{enumerate}
+	\item Absorption	\begin{eqnarray*}
+						A \land (A \lor B) & \equiv &  A \\
+						A \lor (A \land B) & \equiv &  A 
+					\end{eqnarray*}
+	\pause
+	\item Idempotence	\begin{eqnarray*}
+						A \land A & \equiv & A \\
+						A \lor A & \equiv & A \\
+						\lnot(\lnot A) & \equiv & A 
+					\end{eqnarray*}
+\end{enumerate}
+\end{theorem}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Tautology and Contradiction}
+ \begin{definition}
+ A formula which is always ``true'', no matter which truth values are assigned to its variables is called a {\em tautology} (sign {\bf T}). A formula which is always ``false'', no matter which truth values are assigned to its variables is called a {\em contradiction} (sign {\bf F}).
+ \end{definition}
+ \pause
+\begin{example}
+ It is easy to show that $(A \Rightarrow B) \Leftrightarrow (\lnot A \lor B)$ is a tautology.
+\end{example}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Laws with Contradictions and Tautologies}
+ 
+\begin{theorem}
+ 	For a proposition $A$ holds:
+	
+\begin{eqnarray*}
+ A \land \mathbf{T}  \equiv A, &  A \lor \mathbf{T} \equiv \mathbf{T} \\
+ A \land \mathbf{F}  \equiv \mathbf{F}, &  A \lor \mathbf{F} \equiv A \\
+ A \land \lnot A \equiv \mathbf{F}, & A \lor \lnot A \equiv \mathbf{T}
+\end{eqnarray*}
+\end{theorem}
+\end{frame}
+
+\end{document}

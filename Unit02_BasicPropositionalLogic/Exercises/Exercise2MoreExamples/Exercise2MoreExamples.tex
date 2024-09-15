@@ -1,0 +1,85 @@
+\documentclass[a4paper,11pt]{exam}
+
+\pointpoints{\%}{\%}
+
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage[german, english]{babel}
+\usepackage[utf8]{inputenc}
+
+\theoremstyle{definition}
+\newtheorem{remark}{Remark}
+\begin{document}
+
+%\printanswers
+
+\begin{center} \fbox{\fbox{\parbox{5.5in}{\centering
+LOAL Exercises Propositional Logic.}}}
+\end{center}
+%\makebox[\textwidth]{Name: \enspace\hrulefill}
+
+
+\newtheorem{theorem}{Theorem}
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+
+\begin{questions}
+
+\question{\bf Analyse Propositional Logic Formula}
+For each of the following propositions construct a truth table and state whether the proposition is a tautology, a contradiction, or satisfiable.
+
+\begin{remark}
+	A formula is satisfiable if and only if it is neither a tautology nor a contradiction.
+\end{remark}
+
+\begin{otherlanguage*}{german}
+	Erstellen Sie für jede der angegebenen aussagenlogischen Formeln eine Wahrheitstabelle und geben Sie an, ob die Formel eine Tautologie, eine Kontradiktion, oder erfüllbar ist.
+
+	\begin{remark}
+		Eine Formel ist genau dann erfüllbar, wenn sie weder eine Tautologie noch eine Kontradiktion ist.
+	\end{remark}
+\end{otherlanguage*}
+
+\begin{parts}
+	\part $\lnot p$
+	\part $(p \lor \lnot q) \Rightarrow q$
+\end{parts}
+
+\question{\bf Advice}
+``What is the secret of your life?'' a 100-year old man was asked. ``I keep a strict diet'' he answered. ``If I drink no beer for a meal then I always have fish. Whenever I have fish and beer for the same meal I don't eat ice cream. If I have ice cream or no beer then I don't touch the fish.''
+
+\begin{otherlanguage}{german}
+``Worin besteht das Geheimnis Ihres langen Lebens?'' wurde ein 100-jähriger gefragt. ``Ich halte mich streng an folgende Diätregeln: wenn ich kein Bier zu einer Mahlzeit trinke, dann habe ich immer Fisch. Immer wenn ich Fisch und Bier zur selben Mahlzeit habe, dann verzichte ich auf Eiscreme. Wenn ich Eiscreme habe oder Bier meide, dann rühre ich Fisch nicht an.''
+\end{otherlanguage}
+
+\begin{parts}
+	\part 	Make a propositional logic formula out of the advice above (State clearly which atomic propositions $A, B \ldots$ you use and what they mean).
+
+		\begin{otherlanguage}{german}
+			Formalisieren Sie die Aussagen des Greises (Geben Sie dabei an, welche atomaren Aussagen, $A, B, \ldots$ Sie verwenden und was sie bedeuten)
+		\end{otherlanguage}
+\end{parts}
+
+\begin{solution}
+\begin{itemize}
+	\item $B$ \ldots drinks beer
+	\item $E$ \ldots eats ice cream
+	\item $F$ \ldots eats fish
+\end{itemize}
+
+$(\lnot B \Rightarrow F) \land (B \land F \Rightarrow \lnot E) \land (E \lor \lnot B \Rightarrow \lnot F) \equiv B \land (\lnot E \lor \lnot F)$
+\end{solution}
+
+\question {\bf Odd Number Detector}
+Construct a propositional logic formula $O(A, B, C, D)$ which is true if the binary representation of the input variables $A, B, C,$ and $D$ is an odd number, and false otherwise. The variable $A$ represents the least significant bit, followed by $B, C$ and finally $D$ as the most significant bit. Example: if the variables have the values $A =$ true, $B =$ false, $C =$ true, $D =$ false, this would represent the binary number $0101$. Since $0101$ is an odd number $O($true, false, true, false$) =$ true.
+\begin{parts}
+	\part Construct the truth table of this formula
+	\part Give the propositional logic formula in disjuncitve normal form (DNF)
+	\part Try to find a minimization without formal minimization, K-Maps, or Quine McCluskey. All bits generate an even number because they are $2^1, 2^2, 2^3,$ \ldots The sum of even numbers is an even number. Only $2^0 = 1$ generates an odd number.  
+\end{parts}
+
+\end{questions}
+
+\end{document}
