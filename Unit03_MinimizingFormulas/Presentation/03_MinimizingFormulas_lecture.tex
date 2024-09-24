@@ -1,0 +1,487 @@
+\documentclass{beamer}
+%%% BEGIN PREAMBLE
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+% \usepackage{beamerthemesplit} // Activate for custom appearance
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+
+% Definitions
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% Title stuff
+\title{Unit 03 – Minimizing Formulas}
+\author{Peter Bauer}
+\date{} % delete this line to display the current date
+
+%%% BEGIN DOCUMENT
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+	\frametitle{Outline}
+	\tableofcontents
+\end{frame}
+
+\section{Disjunctive Normal Form}
+\begin{frame}
+	\frametitle{Disjunctive Normal Form -- Motivation}
+	\begin{itemize}
+	\item Given the truth table of a propositional formula $P$
+	\item Find a logically equivalent formula $P^{\prime}$
+	\pause
+	\item No unambiguous solution
+	\pause
+	\item Disjunctive normal form is one (and easy to find) solution
+	\pause
+	\item Is a basis for several methods of several algorithms for automated formula simplification
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Disjunctive Normal Form}
+	\begin{definition}
+	A propositional logic formula of the form
+	\begin{align*}
+		(A_{11} \land A_{12} \land \ldots \land A_{1n}) & \lor \\
+		(A_{21} \land A_{22} \land \ldots \land A_{2n}) & \lor \\
+		\ldots \\
+		(A_{m1} \land A_{m2} \land \ldots \land A_{mn}) & \\
+	\end{align*}
+	is called a {\em formula in disjunctive normal form} (DNF).
+\end{definition}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Procedure to Find the DNF}
+\begin{itemize}
+	\item Given a propositional formula $P(A_1, A_2, \ldots A_n)$ with $n$ propositional variables
+	\pause
+	\item Calculate the truth table of $P$
+	
+	\item For each row $j$ in the truth table, where $P=t$ model a sub-formula $Q_j$ as follows:
+	\pause
+	\[Q_j = \left ( \left ( \begin{matrix}A_1 \\ \text{or} \\ \lnot A_1  \end{matrix} \right ) \land
+		\left ( \begin{matrix}A_2 \\ \text{or} \\ \lnot A_2  \end{matrix} \right ) \land \ldots \land
+		\left (\begin{matrix}A_n \\ \text{or} \\ \lnot A_n  \end{matrix}\right ) \right ). \]
+	
+	\item Choose $A_i$ for the $i^{\text{th}}$ variable if the truth table holds a $t$ and $\lnot A_i$ otherwise.
+	\pause
+	\item The complete formula $P^{\prime}$ is realized by assembling all the sub-formulas $Q_1, Q_2, \ldots, Q_m$ as follows:
+		\[P^{\prime} = Q_1 \lor Q_2 \lor \ldots \lor Q_m\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example}
+
+\begin{example}
+	Consider the formula $P(A, B) = A \Rightarrow B$. The truth table would be as follows:
+	\begin{center}
+	\begin{tabular}{c|c||c||c}
+		$A$ & $B$ & $P(A, B)$ & $Q_j(A, B)$\\ \hline
+		t & t & \pause  t & \pause $A \land B$\\ \hline
+		t & f & \pause f &\pause --- \\ \hline
+		f & t & \pause t & \pause $\lnot A \land B$ \\ \hline
+		f & f & \pause t & \pause $\lnot A \land \lnot B$
+	\end{tabular}
+	\vspace{1.5em}
+	
+	Therefore, $P$ could be rewritten in disjunctive normal form as $P^{\prime}(A, B) = (A \land B) \lor (\lnot A \land B) \lor (\lnot A \land \lnot B)$.
+	\end{center}
+\end{example}
+\end{frame}
+
+\section{Minimization of Propositional Logic Formulas}
+\subsection{KV-Diagrams -- Motivation}
+\begin{frame}
+
+	\frametitle{Minimizing Formulas -- Motivation}
+	
+	\begin{itemize}
+		\item Easier to understand
+		\item Save money when constructing integrated circuits
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{KV-Diagrams}
+	Consider the following formula in DNF
+	\[ P^{\prime}(A, B) = (A \land B) \lor (\lnot A \land B) \lor (\lnot A \land \lnot B).\]
+	
+	In the two dimensional case we construct a diagram in the following way:
+	
+	\vspace{1.5em}
+	
+	\begin{center}
+	\begin{tabular}{c|c|c|c}
+		& $\lnot A$ & $A$ \\ \hline
+		$\lnot B$ & &  \\ \hline
+		$B$ & &   \\ \hline
+	\end{tabular}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{KV-Diagrams}
+	Consider the following formula in DNF
+	\[ P^{\prime}(A, B) = \colorbox{red}{($A \land B$)} \lor (\lnot A \land B) \lor (\lnot A \land \lnot B).\]
+	
+	In the two dimensional case we construct a diagram in the following way:
+	
+	\vspace{1.5em}
+	
+	\begin{center}
+	\begin{tabular}{c|c|c|c}
+		& $\lnot A$ & $A$ \\ \hline
+		$\lnot B$ & &  \\ \hline
+		$B$ & &  \\ \hline
+	\end{tabular}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{KV-Diagrams}
+	Consider the following formula in DNF
+	\[ P^{\prime}(A, B) = \colorbox{red}{($A \land B$)} \lor (\lnot A \land B) \lor (\lnot A \land \lnot B).\]
+	
+	In the two dimensional case we construct a diagram in the following way:
+	
+	\vspace{1.5em}
+	
+	\begin{center}
+	\begin{tabular}{c|c|c|c}
+		& $\lnot A$ & $A$ \\ \hline
+		$\lnot B$ & &  \\ \hline
+		$B$ & &  \colorbox{red}{1} \\ \hline
+	\end{tabular}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{KV-Diagrams}
+	Consider the following formula in DNF
+	\[ P^{\prime}(A, B) = (A \land B) \lor \colorbox{red}{$(\lnot A \land B)$} \lor (\lnot A \land \lnot B).\]
+	
+	In the two dimensional case we construct a diagram in the following way:
+	
+	\vspace{1.5em}
+	
+	\begin{center}
+	\begin{tabular}{c|c|c|c}
+		& $\lnot A$ & $A$ \\ \hline
+		$\lnot B$ & &  \\ \hline
+		$B$ & &  1\\ \hline
+	\end{tabular}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{KV-Diagrams}
+	Consider the following formula in DNF
+	\[ P^{\prime}(A, B) = (A \land B) \lor \colorbox{red}{$(\lnot A \land B)$} \lor (\lnot A \land \lnot B).\]
+	
+	In the two dimensional case we construct a diagram in the following way:
+	
+	\vspace{1.5em}
+	
+	\begin{center}
+	\begin{tabular}{c|c|c|c}
+		& $\lnot A$ & $A$ \\ \hline
+		$\lnot B$ & &  \\ \hline
+		$B$ & \colorbox{red}{1}&  1\\ \hline
+	\end{tabular}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{KV-Diagrams}
+	Consider the following formula in DNF
+	\[ P^{\prime}(A, B) = (A \land B) \lor (\lnot A \land B) \lor \colorbox{red}{$(\lnot A \land \lnot B)$}.\]
+	
+	In the two dimensional case we construct a diagram in the following way:
+	
+	\vspace{1.5em}
+	
+	\begin{center}
+	\begin{tabular}{c|c|c|c}
+		& $\lnot A$ & $A$ \\ \hline
+		$\lnot B$ & &  \\ \hline
+		$B$ & 1 &  1\\ \hline
+	\end{tabular}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{KV-Diagrams}
+	Consider the following formula in DNF
+	\[ P^{\prime}(A, B) = (A \land B) \lor (\lnot A \land B) \lor \colorbox{red}{$(\lnot A \land \lnot B)$}.\]
+	
+	In the two dimensional case we construct a diagram in the following way:
+	
+	\vspace{1.5em}
+	
+	\begin{center}
+	\begin{tabular}{c|c|c|c}
+		& $\lnot A$ & $A$ \\ \hline
+		$\lnot B$ & \colorbox{red}{1} &  \\ \hline
+		$B$ & 1 &  1\\ \hline
+	\end{tabular}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{KV-Diagrams}
+	Consider the following formula in DNF
+	\[ P^{\prime}(A, B) = (A \land B) \lor (\lnot A \land B) \lor (\lnot A \land \lnot B).\]
+	
+	In the two dimensional case we construct a diagram in the following way:
+	
+	\vspace{1.5em}
+	
+	\begin{center}
+	\begin{tabular}{c|c|c|c}
+		& $\lnot A$ & $A$ \\ \hline
+		$\lnot B$ & 1 &  \\ \hline
+		$B$ & 1 &  1\\ \hline
+	\end{tabular}
+	\end{center}
+	
+	Now we try to find boxes of size 2 or 4 or 8, etc. These boxes should be as large as possible. The number of boxes should be as small as possible. The boxes may overlap.
+\end{frame}
+
+\begin{frame}
+	\frametitle{KV-Diagrams}
+	Consider the following formula in DNF
+	\[ P^{\prime}(A, B) = (A \land B) \lor (\lnot A \land B) \lor (\lnot A \land \lnot B).\]
+	
+	In the two dimensional case we construct a diagram in the following way:
+	
+	\vspace{1.5em}
+	
+	\begin{center}
+	\begin{tabular}{c|c|c|c}
+		& $\lnot A$ & $A$ \\ \hline
+		$\lnot B$ & \colorbox{red}{1} &  \\ \hline
+		$B$ & \colorbox{red}{1} &  1\\ \hline
+	\end{tabular}
+	\end{center}
+	
+	$\lnot A$
+\end{frame}
+
+\begin{frame}
+	\frametitle{KV-Diagrams}
+	Consider the following formula in DNF
+	\[ P^{\prime}(A, B) = (A \land B) \lor (\lnot A \land B) \lor (\lnot A \land \lnot B).\]
+	
+	In the two dimensional case we construct a diagram in the following way:
+	
+	\vspace{1.5em}
+	
+	\begin{center}
+	\begin{tabular}{c|c|c|c}
+		& $\lnot A$ & $A$ \\ \hline
+		$\lnot B$ & 1 &  \\ \hline
+		$B$ & \colorbox{red}{1} &  \colorbox{red}{1}\\ \hline
+	\end{tabular}
+	\end{center}
+	
+	$\lnot A \lor B$
+\end{frame}
+
+\begin{frame}
+	\frametitle{KV-Diagrams -- Another Example}
+	\begin{example}
+		\begin{align*}
+			(\lnot A \land B \land C \land \lnot D) & \lor (A \land \lnot B \land \lnot C \land \lnot D) & \lor (A \land \lnot B \land \lnot C \land D) & \lor \\
+			(A \land \lnot B \land C \land D) & \lor (A \land \lnot B \land C \land \lnot D) & \lor (A \land B \land \lnot C \land \lnot D) & \lor \\
+			(A \land B \land \lnot C \land D) & \lor (A \land B \land C \land \lnot D)
+		\end{align*}
+	\end{example}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Another Example -- Sample Solution}
+	\pause
+	
+	\begin{center}
+	\begin{tabular}{c|c|c|c|c|c}
+	 & $A$ & $A$ & $\lnot A$ & $\lnot A$ & \\ \hline
+	$B$ & & 1 & & & $D$ \\ \hline
+	$B$ & 1 & 1 & & 1 & $\lnot D$ \\ \hline
+	$\lnot B$ & 1 & 1 & & & $\lnot D$ \\ \hline
+	$\lnot B$ & 1 & 1 & & & $D$ \\ \hline
+	 & $C$ & $\lnot C$ & $\lnot C$ & $C$ &
+	\end{tabular}
+	\end{center}
+	
+	\vspace{1.5em}
+	
+	$(A \land \lnot C) \lor (A \land \lnot B) \lor (B \land C \land \lnot D)$
+\end{frame}
+
+\begin{frame}
+	\frametitle{KV-Table for Three Variables}
+	
+	\begin{center}
+	\begin{tabular}{c|c|c|c|c|c}
+	 & $A$ & $A$ & $\lnot A$ & $\lnot A$ & \\ \hline
+	 $B$ & &&&& \\ \hline
+	 $\lnot B$ &&&&& \\ \hline
+	  & $C$ & $\lnot C$ & $\lnot C$ & $C$ &
+	
+	\end{tabular}
+	\end{center}
+\end{frame}
+
+\subsection{Quine-McCluskey Algorithm}
+\begin{frame}
+\frametitle{Minterm and Literal}
+
+\begin{definition}
+	Given a propositional logic formula $P = Q_1 \lor Q_2 \lor \ldots \lor Q_m$, where all $Q_j (1 \leq j \leq m)$ are of the form
+	\[Q_j = \left ( \left ( \begin{matrix}A_1 \\ \text{or} \\ \lnot A_1  \end{matrix} \right ) \land
+		\left ( \begin{matrix}A_2 \\ \text{or} \\ \lnot A_2  \end{matrix} \right ) \land \ldots \land
+		\left (\begin{matrix}A_n \\ \text{or} \\ \lnot A_n  \end{matrix}\right ) \right ) \]
+
+	
+	we call $Q_j$ a {\em minterm}. The $A_i$ or $\lnot A_i$ ($1 \leq i \leq n$) are called {\em literals}.
+\end{definition}
+
+\pause
+
+\begin{remark}
+Sometimes we also call a row of a truth table which result is true a minterm.
+\end{remark}
+
+\pause
+
+\begin{remark}
+In case of a multiple appearance of a literal $A_i$ in a $Q_j$, $Q_j$ is called a product term.
+\end{remark}
+\end{frame}
+
+\begin{frame}
+\frametitle{Implicant}
+
+\begin{definition}
+Given a propositional logic formula $P = Q_1 \lor \ldots \lor Q_m$ with each minterm $Q_i$ having $n$ literals $A_1, A_2, \ldots, A_n$. Furthermore we have a product term
+\[I = \left ( \left ( \begin{matrix}A_1 \\ \text{or} \\ \lnot A_1  \end{matrix} \right ) \land
+		\left ( \begin{matrix}A_2 \\ \text{or} \\ \lnot A_2  \end{matrix} \right ) \land \ldots \land
+		\left (\begin{matrix}A_n \\ \text{or} \\ \lnot A_n  \end{matrix}\right ) \right ).\]
+
+\pause
+
+$I$ is called a {\em prime implicant} of $P$ if $I \Rightarrow P$, i.e., that whenever the evaluation of $I$ with a specific set of truth values for $A_1, A_2, \ldots, A_n$ yields true, the evaluation of $P$ with the same set of truth values also yields true.
+\end{definition}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Example and Remark}
+	
+	Consider the following propositional logic formula $P$:
+	
+	\vspace{1em}
+	
+	\begin{tabular}{ccc}
+	$P$ & = & $(A_1 \land A_2) \lor (A_2 \land A_3) \lor A_4$
+	\end{tabular}
+	
+	\vspace{1em}
+	
+	This formula is implied by the formulas $A_1 \land A_2$, $A_2 \land A_3$, $A_4$, $A_1 \land A_2 \land A_3$, $A_1 \land A2_ \land A_4$ and many others. These are the implicants of $P$.
+	
+	\pause
+	\begin{remark}
+		Implicants are sometimes called ``coverings" of one or more minterms.
+	\end{remark}
+\end{frame}
+
+\begin{frame}
+\frametitle{Prime Implicant}
+
+\begin{definition}
+Given a propositional logic formula $P$. An implicant $I$ is called a {\em prime implicant} if it can't be reduced any further, i.e., any removal of a literal would make it a ``non-implicant".
+\end{definition}
+
+\pause
+
+\begin{example}
+	Let 
+	\begin{tabular}{ccc}
+	$P$ & = & $(A_1 \land A_2) \lor (A_2 \land A_3) \lor A_4$
+	\end{tabular}
+	be a propositional logic formula. The prime implicants of $P$ would be $A_1 \land A_2$, $A_2 \land A_3$, and $A_4$ would be the prime implicants of $P$.
+
+\end{example}
+\end{frame}
+
+\begin{frame}
+\frametitle{Prime Implicant and Minimal Formulas}
+\begin{definition}
+	A disjunction of prime implicants covering a complete formula $P$ is called a minimal formula of $P$.
+\end{definition}
+
+\begin{remark}
+	There may exist more than one minimal formula.
+\end{remark}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example}
+Given the following truth table $M$:
+\begin{center}
+	\begin{tabular}{c|c|c||c}
+		$x_1$ & $x_2$ & $x_3$ & $y$ \\ \hline
+		f & f & f & f \\ \hline
+		f & f & t & f \\ \hline
+		f & t & f & f \\ \hline
+		f & t & t & t \\ \hline
+		t & f & f & t \\ \hline
+		t & f & t & t \\ \hline
+		t & t & f & f \\ \hline
+		t & t & t & t
+	\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example continued}
+\begin{itemize}
+
+\item
+\begin{tabular}{ccccc}
+$\lnot A_1$ & $\land$ & $A_2$ & $\land$ & $A_3$ \\
+$A_1$ &$\land$& $\lnot A_2$ &$\land$& $\lnot A_3$ \\
+$A_1$ & $\land$ & $\lnot A_2$ & $\land$ & $A_3$  \\
+$A_1$ & $\land$ & $A_2$ & $\land$ & $A_3$
+\end{tabular}
+
+are the  minterms of $M$.
+
+\pause
+\item $A_1 \land \lnot A_2$ and $A_2 \land A_3$ are prime implicants of $M$.
+
+\pause
+\item $A_1 \land \lnot A_2 \lor A_2 \land A_3$ is a minimal formula representing $M$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Quine-McCluskey Algorithm}
+\begin{itemize}
+	\item An algorithm to find minimal formulas
+	\item Finds all prime implicants of a given formula $S$
+	\item Finds a combination of prime implicants which covers $S$
+	\item Example as given in class
+\end{itemize}
+\end{frame}
+
+\end{document}
