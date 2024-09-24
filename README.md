@@ -25,3 +25,10 @@ Class material
 - [Handout](Unit02_BasicPropositionalLogic/Presentation/02_PropositionalLogicBasics_lecture.pdf)
 - [Graded Exercise](Unit02_BasicPropositionalLogic/Exercises/Exercise2.pdf)
 - [More examples](Unit02_BasicPropositionalLogic/Exercises/Exercise2MoreExamples/Exercise2MoreExamples.pdf) as training material for quizzes and tests
+
+### Unit 3 - Minimizing Propositional Formulas
+In this unit we will discuss three different ways how we can minimize propositional formulas. This is great since it helps us to design electronic circuits with minimal costs or to make things easier to understand. As a bonus we also learn first steps to proof propositions.
+
+Class Material
+- [Handout](Unit03_MinimizingFormulas/Presentation/03_MinimizingFormulas_lecture.pdf)
+- [Graded Exercise](./Unit03_MinimizingFormulas/Exercise3.pdf)
