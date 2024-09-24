@@ -28,32 +28,37 @@
 
 \section{Propositional Logic Proofs}
 \begin{frame}
-	\frametitle{Minimizing and Proofs}
-	\framesubtitle{The similarities}
+	\frametitle{Minimizing}
 	\begin{itemize}
 		\item Given: a propositional formula $P$
 		\item Wanted: a propositional formula $Q$
 		\item where $P \equiv Q$
+		\item $Q$ should be minimal according to some criterion (e.g., by number of variables, length of formula, \ldots)
+		\item We ``go'' from $P$ to $Q$ by tiny steps which are already proven
+		\item These small steps are the well known properties of the compositions
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Minimizing and Proofs}
-	\framesubtitle{The differences}
+	\frametitle{Proofs}
 	\begin{itemize}
-		\item When minimizing
-		\begin{itemize}
-			\item $Q$ should me ``minimal''
-			\item e.g., by number of variables, length of formula, \ldots
-		\end{itemize}
-		\item When proofing
-		\begin{itemize}
-			\item $Q$ is also given
-			\item We want to show that we can ``go'' from $P$ to $Q$
-			\item Using small steps which are already proven (aka Properties of Compositions)
-		\end{itemize}
+		\item Given: two propositional formulas $P$ and $Q$
+		\item Wanted: a ``way'' from $P$ to $Q$
+		\item in order to show that $P \equiv Q$
+		\item The ``way'' is again gone by tiny steps which are already proven
 	\end{itemize}
 \end{frame}
+
+\begin{frame}
+	\frametitle{Summary and Motivation for Training}
+	\begin{itemize}
+		\item Minimizing and proofing require the same skills
+		\item Manipulate propositional formulas by using our well-known properties
+		\item Two birds with one stone!
+		\item So lets start doing some training
+	\end{itemize}
+\end{frame}
+
 \AtBeginEnvironment{align}{\setcounter{equation}{0}}
 \begin{frame}
 	\frametitle{A First Example}
