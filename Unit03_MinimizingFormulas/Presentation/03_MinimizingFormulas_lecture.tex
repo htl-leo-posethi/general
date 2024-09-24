@@ -26,6 +26,85 @@
 	\tableofcontents
 \end{frame}
 
+\section{Propositional Logic Proofs}
+\begin{frame}
+	\frametitle{Minimizing and Proofs}
+	\framesubtitle{The similarities}
+	\begin{itemize}
+		\item Given: a propositional formula $P$
+		\item Wanted: a propositional formula $Q$
+		\item where $P \equiv Q$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Minimizing and Proofs}
+	\framesubtitle{The differences}
+	\begin{itemize}
+		\item When minimizing
+		\begin{itemize}
+			\item $Q$ should me ``minimal''
+			\item e.g., by number of variables, length of formula, \ldots
+		\end{itemize}
+		\item When proofing
+		\begin{itemize}
+			\item $Q$ is also given
+			\item We want to show that we can ``go'' from $P$ to $Q$
+			\item Using small steps which are already proven (aka Properties of Compositions)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+\AtBeginEnvironment{align}{\setcounter{equation}{0}}
+\begin{frame}
+	\frametitle{A First Example}
+	We want to proof that $C \lor \lnot(B \land C) \equiv \text{{\bf T}}$
+	\pause
+	\begin{align}
+		C \lor \lnot(B \land C)  & \equiv & \text{[DeMorgan]} \\
+		C \lor (\lnot B \lor \lnot C) & \equiv & \text{[Commut.]} \\
+		C \lor (\lnot C \lor \lnot B) & \equiv & \text{[Assoc.]} \\
+		(C \lor \lnot C) \lor \lnot B & \equiv & \text{[Taut.]} \\
+		\text{{\bf T}} \lor \lnot B & \equiv & \text{[Taut.]} \\
+		\text{{\bf T}} & \hspace{1em}\square
+	\end{align}
+\end{frame}
+
+\begin{frame}
+	\frametitle{A Second Example}
+	\framesubtitle{Your Turn}
+	Proof that $(P \lor \lnot Q) \Rightarrow Q \equiv (\lnot P \lor Q) \land Q$
+
+	Bring the lines below in the right order and write down the properties used.
+
+	{\bf Hint:} Here a property $A \Rightarrow B \equiv \lnot A \lor B$ is used. We call it the Implication Elimination Rule (IER).
+
+	\begin{align}
+		(P \lor \lnot Q) \Rightarrow Q & \equiv \\
+		(\lnot P \lor Q) \land Q & \hspace{1em}\square \\
+		(\lnot P \lor Q) \land (Q \lor Q) & \equiv \\
+		(\lnot P \land Q) \lor Q & \equiv \\
+		\lnot(P \lor \lnot Q) \lor Q & \equiv
+	\end{align}
+\end{frame}
+
+\begin{frame}
+	\frametitle{A Third Example}
+	\framesubtitle{Again Your Turn}
+	Proof that $A \Rightarrow B \equiv A \land \lnot B \Rightarrow \text{{\bf F}}$
+
+	\newcommand{\ph}{\underline{\hspace{1em}}\hspace{.5em}}
+
+	\begin{align}
+		A \Rightarrow B & \equiv & [IER] \\
+		\lnot A \hspace{.5em} \ph \ph & \equiv & [DeMorgan] \\
+		\ph(\lnot\lnot\ph\ph\ph\ph) & \equiv & [Double Negation] \\
+		\ph(\ph \ph \ph \ph) & \equiv & [Tautology]\\
+		\ph(\ph \ph \ph \ph) \ph \text{{\bf F}} & \equiv & [IER] \\
+		\ph \ph \ph \ph \Rightarrow \ph & \hspace{1em}\square
+	\end{align}
+
+\end{frame}
+
 \section{Disjunctive Normal Form}
 \begin{frame}
 	\frametitle{Disjunctive Normal Form -- Motivation}
