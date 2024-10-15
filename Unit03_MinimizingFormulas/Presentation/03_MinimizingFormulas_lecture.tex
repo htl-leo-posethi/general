@@ -63,15 +63,16 @@
 \begin{frame}
 	\frametitle{A First Example}
 	We want to proof that $C \lor \lnot(B \land C) \equiv \text{{\bf T}}$
-	\pause
 	\begin{align}
-		C \lor \lnot(B \land C)  & \equiv & \text{[DeMorgan]} \\
-		C \lor (\lnot B \lor \lnot C) & \equiv & \text{[Commut.]} \\
-		C \lor (\lnot C \lor \lnot B) & \equiv & \text{[Assoc.]} \\
-		(C \lor \lnot C) \lor \lnot B & \equiv & \text{[Taut.]} \\
-		\text{{\bf T}} \lor \lnot B & \equiv & \text{[Taut.]} \\
-		\text{{\bf T}} & \hspace{1em}\square
+		C \lor \lnot(B \land C)  & \equiv & \text{[DeMorgan]} \\ 
+		\uncover<2->{C \lor (\lnot B \lor \lnot C) & \equiv & \text{[Commut.]} \\}
+		\uncover<3->{C \lor (\lnot C \lor \lnot B) & \equiv & \text{[Assoc.]} \\}
+		\uncover<4->{(C \lor \lnot C) \lor \lnot B & \equiv & \text{[Taut.]} \\}
+		\uncover<5->{\text{{\bf T}} \lor \lnot B & \equiv & \text{[Taut.]} \\}
+		\uncover<6->{\text{{\bf T}} & \hspace{1em}\square \\}
+		\notag
 	\end{align}
+	\vskip-1.5em
 \end{frame}
 
 \begin{frame}
@@ -180,7 +181,7 @@
 \end{frame}
 
 \section{Minimization of Propositional Logic Formulas}
-\subsection{KV-Diagrams -- Motivation}
+\subsection{Karnaugh Map}
 \begin{frame}
 
 	\frametitle{Minimizing Formulas -- Motivation}
@@ -192,7 +193,7 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{KV-Diagrams}
+	\frametitle{Karnaugh Map}
 	Consider the following formula in DNF
 	\[ P^{\prime}(A, B) = (A \land B) \lor (\lnot A \land B) \lor (\lnot A \land \lnot B).\]
 	
@@ -210,7 +211,7 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{KV-Diagrams}
+	\frametitle{Karnaugh Map}
 	Consider the following formula in DNF
 	\[ P^{\prime}(A, B) = \colorbox{red}{($A \land B$)} \lor (\lnot A \land B) \lor (\lnot A \land \lnot B).\]
 	
@@ -228,7 +229,7 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{KV-Diagrams}
+	\frametitle{Karnaugh Map}
 	Consider the following formula in DNF
 	\[ P^{\prime}(A, B) = \colorbox{red}{($A \land B$)} \lor (\lnot A \land B) \lor (\lnot A \land \lnot B).\]
 	
@@ -246,7 +247,7 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{KV-Diagrams}
+	\frametitle{Karnaugh Map}
 	Consider the following formula in DNF
 	\[ P^{\prime}(A, B) = (A \land B) \lor \colorbox{red}{$(\lnot A \land B)$} \lor (\lnot A \land \lnot B).\]
 	
@@ -264,7 +265,7 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{KV-Diagrams}
+	\frametitle{Karnaugh Map}
 	Consider the following formula in DNF
 	\[ P^{\prime}(A, B) = (A \land B) \lor \colorbox{red}{$(\lnot A \land B)$} \lor (\lnot A \land \lnot B).\]
 	
@@ -282,7 +283,7 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{KV-Diagrams}
+	\frametitle{Karnaugh Map}
 	Consider the following formula in DNF
 	\[ P^{\prime}(A, B) = (A \land B) \lor (\lnot A \land B) \lor \colorbox{red}{$(\lnot A \land \lnot B)$}.\]
 	
@@ -300,7 +301,7 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{KV-Diagrams}
+	\frametitle{Karnaugh Map}
 	Consider the following formula in DNF
 	\[ P^{\prime}(A, B) = (A \land B) \lor (\lnot A \land B) \lor \colorbox{red}{$(\lnot A \land \lnot B)$}.\]
 	
@@ -318,7 +319,7 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{KV-Diagrams}
+	\frametitle{Karnaugh Map}
 	Consider the following formula in DNF
 	\[ P^{\prime}(A, B) = (A \land B) \lor (\lnot A \land B) \lor (\lnot A \land \lnot B).\]
 	
@@ -338,7 +339,7 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{KV-Diagrams}
+	\frametitle{Karnaugh Map}
 	Consider the following formula in DNF
 	\[ P^{\prime}(A, B) = (A \land B) \lor (\lnot A \land B) \lor (\lnot A \land \lnot B).\]
 	
@@ -358,7 +359,7 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{KV-Diagrams}
+	\frametitle{Karnaugh Map}
 	Consider the following formula in DNF
 	\[ P^{\prime}(A, B) = (A \land B) \lor (\lnot A \land B) \lor (\lnot A \land \lnot B).\]
 	
@@ -378,7 +379,7 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{KV-Diagrams -- Another Example}
+	\frametitle{Karnaugh Map -- Another Example}
 	\begin{example}
 		\begin{align*}
 			(\lnot A \land B \land C \land \lnot D) & \lor (A \land \lnot B \land \lnot C \land \lnot D) & \lor (A \land \lnot B \land \lnot C \land D) & \lor \\
@@ -409,7 +410,7 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{KV-Table for Three Variables}
+	\frametitle{Karnaugh Map for Three Variables}
 	
 	\begin{center}
 	\begin{tabular}{c|c|c|c|c|c}
