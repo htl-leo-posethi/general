@@ -32,3 +32,10 @@ In this unit we will discuss three different ways how we can minimize propositio
 Class Material
 - [Handout](Unit03_MinimizingFormulas/Presentation/03_MinimizingFormulas_lecture.pdf)
 - [Graded Exercise](./Unit03_MinimizingFormulas/Exercise3.pdf)
+
+### Unit 4 - Predicate Logic
+In this unit we will discuss how to enhance our means to express more general propositions. We will step from general propositions to a level where we can transform arbitrary real world problems into mathematical models. We will see that math is nothing else but a very powerful programming language.
+
+Class Material
+- [Handout](./Unit04_PredicateLogic/Presentation/05_PredicateLogic_lecture.pdf)
+- [Graded Exercise](./Unit04_PredicateLogic/Exercises/Exercise4.pdf)

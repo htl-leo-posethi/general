@@ -1,0 +1,92 @@
+\documentclass[a4paper,11pt]{exam}
+
+\pointpoints{\%}{\%}
+
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[german, english]{babel}
+\usepackage[utf8]{inputenc}
+
+\theoremstyle{definition}
+\newtheorem{remark}{Remark}
+\begin{document}
+
+%\printanswers
+
+\begin{center} \fbox{\fbox{\parbox{5.5in}{\centering
+IF.05.22 -- Theoretical Informatics -- Predicate Logic 1.}}}
+\end{center}
+%\makebox[\textwidth]{Name: \enspace\hrulefill}
+
+
+\newtheorem{theorem}{Theorem}
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+
+\begin{questions}
+\question{\bf Expressing in First Ordered Predicate Logic} \label{que:translate}
+Translate the following sentences into first ordered predicate logic. Define terms and predicates as needed. You may assume the usual mathematical predicate and function constants, like $<, \leq, =$, \ldots $+, -, \frac{x}{y}, x^2, \sqrt{x}$, \ldots Furthermore you may use the usual sets, like $\mathbb{N}, \mathbb{Z}, \mathbb{Q}$, etc.
+
+\begin{parts}
+	\part If a number divides two numbers, then it also divides their sums.
+		\begin{solution}
+		$\forall a, b, c: a, b, c \in \mathbb{N} \Rightarrow ((a | b) \land (a | c) \Rightarrow (a | (b + c))$
+	\end{solution}
+	\part No school buses are purple
+	\begin{solution}
+		$\lnot \exists c: \mathrm{isSchoolBus}(c) \land \mathrm{isPurple}(c)$
+	\end{solution}
+
+	\part Every integer is even or odd
+	\part The only even prime is 2
+	\part Nobody is loved by no none.
+	\part Every citizen of Linz likes Hansi's paternal grandmother
+		\begin{solution}
+			$\forall X \in D: \text{citizen}(X, \text{leonding}) \Rightarrow \text{likes}(\text{mother}(\text{father}(\text{hansi})), X)$
+		\end{solution}		
+\end{parts}
+
+\question{\bf Translate into English/German}
+\begin{parts}
+	\part $\forall x: x \in \mathbb{R} \Rightarrow x^2 \geq 0 $
+	\part $\exists t: t \in \mathbb{R} \land t > 3 \land t^3 > 27$
+	\begin{solution}
+		There exists a real number greater than 3 which power to 3 is greater than 27
+	\end{solution}
+	\part $\forall x: x \in \mathbb{N} \Rightarrow (\text{divides}(2, x) \; \lor \lnot \text{divides}(2, x))$ where $\text{divides}(x, y) \Leftrightarrow \exists z: z \in \mathbb{N} \land x \cdot z = y$
+	\begin{solution}
+		Every positive integer is either dividable by 2 or not. A number $y$ is dividable by another number $x$ if and only if there exists a positive integer $k$ such that $x \cdot k = y$.
+	\end{solution}
+
+\end{parts}
+
+\question{\bf Syntactic Structure of Formulas}
+Analyze the syntactic structure of the following formulas. Declare which variables are bound and which are free.
+\begin{parts}
+	\part $\forall x: x \in \mathbb{R} \Rightarrow (1 + x)^n < 1 + nx$
+	\part $\forall \varepsilon \exists n \forall i: \varepsilon > 0 \land n \in \mathbb{N} \land i \geq n \Rightarrow |a_i - a| < \varepsilon$
+	\part $\cos(x)$ is zero, if $x$ is zero.
+	\part Behind every man stands a strong woman. Hint: Translate this first into a predicate logic formula. You may assume the predicates isMan($x$), isWoman($x$), and standsBehind($x, y$). Your universe of discourse is the set of all people.
+\end{parts}
+
+\question{\bf Define}
+Define a unary predicate constant called {\em surjective} in predicate logic based on the following English sentence:
+\begin{quote}
+$f$ is surjective if and only if every element $b$ of the target set $B$ gets mapped at least one element $a$ of the domain set $A$.
+\end{quote}
+You may write the phrase ``an element $x$ gets mapped an element $y$'' using the following notation: $f(y) = x$.
+
+Only the following phrases and definitions are allowed
+\begin{itemize}
+	\item The symbols $f, A, B, a, b$, and $f(a) = b$ which appear in the sentence above.
+	\item The binary predicate constant $\in$.
+	\item Quantifiers and logical composition operators, like $\land, \lnot, \Rightarrow, \ldots$
+	\item The symbol ":" (colon).
+\end{itemize}
+
+
+\end{questions}
+
+\end{document}

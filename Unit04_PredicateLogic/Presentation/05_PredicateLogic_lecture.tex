@@ -1,0 +1,316 @@
+\documentclass{beamer}
+%%% BEGIN PREAMBLE
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+% \usepackage{beamerthemesplit} // Activate for custom appearance
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+
+% Definitions
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% Title stuff
+\title{Predicate Logic}
+\author{Peter Bauer}
+\date{} % delete this line to display the current date
+
+%%% BEGIN DOCUMENT
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+	\frametitle{Outline}
+	\tableofcontents
+\end{frame}
+
+\section{Terminology}
+\begin{frame}
+\frametitle{Motivation}
+\begin{itemize}
+	\item Propositional logic deals with propositions.
+	\pause
+	\item Propositions were considered to be "atomic"
+	\pause
+	\item To express propositions more concretely we need more sophisticated terms
+	\pause
+	\item Examples
+	\begin{itemize}
+		\item ``$x$ is a prime number.''
+		\item ``4 is an even number.''
+		\item ``This shark is 20 ft. long.''
+	\end{itemize}
+\end{itemize}	
+	
+\end{frame}
+
+\begin{frame}
+\frametitle{Variable}
+\begin{definition}
+A {\em variable} is a name for an arbitrary element out of a universe.
+\end{definition}
+
+\pause
+\begin{remark}
+\begin{itemize}
+ 	\item Variables denote places where values out of the universe can be seen
+	\pause
+	\item Variables are assigned specific values out of the universe
+	\pause
+	\item Names of variables are combinations of characters, numbers and other symbols.
+\end{itemize}
+
+\end{remark}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Constant}
+ If  we want to consider concrete elements of a universe we use constants.
+ \pause
+\begin{definition}
+{\em Constants} are names of concrete objects. These can be concrete values (e.g., $\pi$, 17, 42), function constants (e.g., $+, \cos, \sqrt{\hspace{.5em} }$) or predicate constants (e.g., $\geq, \in$).
+\end{definition}
+\end{frame}
+
+\begin{frame}
+\frametitle{Term}
+\begin{definition}
+Constants and variables are {\em terms}. Syntactic structures of the form $f(t_1, t_2, \ldots, t_n)$ are {\em terms}, if $f$ is a function constant with arity $n$ and $t_1, t_2, \ldots, t_n$ are terms.
+\end{definition}
+
+\pause
+
+\begin{example}
+\begin{itemize}
+	\item $\sin(x)$, where $\sin$ is the function constant with arity 1
+	\pause
+	\item $x + y$, where $+$ is the function constant with arity 2
+	\pause
+	\item $\sqrt{y}$, where $\sqrt{\hspace{.5em}}$ is the function constant with arity 1
+\end{itemize}
+\end{example}
+
+\pause
+\begin{remark}
+ Constant values like $\pi$, 17, or ``Vergissmeinnicht'' can be interpreted as terms. These are terms with a functions constant of arity 0.
+\end{remark}
+\end{frame}
+
+\begin{frame}
+\frametitle{Predicate and Formula}
+
+\begin{definition}
+Phrases which describe properties of objects or relations between objects are called {\em predicate constants} or sometimes {\em predicates}.\end{definition}
+
+\pause
+\begin{example}
+	``is prime'', ``{\tt isValidInput}'', $\geq, =$ are predicate constants.
+\end{example}
+\pause
+
+\begin{definition}
+Syntactic structures of the form $P(t_1, t_2, \ldots, t_n)$ are {\em atomic formulas}, if $P$ is a predicate constant with arity $n$ and $t_1, t_2, \ldots t_n$ are terms.
+\end{definition}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Some Examples and Conventions}
+\begin{remark}
+Instead of the bloomy phrases of everyday life language, we use very slim and symbolic structures in mathematical logic
+\end{remark}
+\pause
+\begin{example}
+\begin{tabular}{|c|c|}
+\hline
+everyday language & logic \\ \hline
+``$y$ is at least as great as $z$'' & $y \geq z$ \\
+``$a$ leads project $b$'' & ProjectLead($a, b$) \\ \hline
+ \end{tabular}
+\end{example}
+ \pause
+\begin{remark}
+\begin{itemize}
+	\item The symbols $a, b, y$, and $z$ are variables, ``$\geq$'' and ``ProjectLead'' are predicate constants.
+	\pause
+	\item In the sequel, we will use upper case letters like $P, Q, R, \ldots$ to denote predicate constants.
+	\pause
+	\item $P, Q, R, \ldots$ are always predicate constants and are {\em not} predicate variables (first order predicate logic)
+\end{itemize}
+\end{remark}
+\end{frame}
+
+\begin{frame}
+\frametitle{Another Example}
+Combining predicate formulas by means of compositions as given in propositional logic lead again to formulas of predicate logic.
+\pause
+\begin{example}
+\begin{itemize}
+	\item Let $x$ be a student of the HTL Leonding.
+	\pause
+	\item Let $P(x) = $ ``$x$ studies LOAL'' and $Q(x) = $ ``$x$ is a first grader''.
+	\pause
+	\item Then the conjunction $P(x) \land Q(x)$ is again a formula of predicate logic.
+	\pause
+	\item $P(x) \land Q(x) = $ ``$x$ studies LOAL and is a first grader''.
+\end{itemize}
+
+\end{example}
+\end{frame}
+
+\section{Quantifiers}
+\begin{frame}
+\frametitle{Quantifier --- Motivation}
+\begin{itemize}
+	\item The truth value of atomic formulas can only be determined if we assign constants to each variable.
+	\item It can't be determined in general, in particular, if the formula contains free variables.
+\end{itemize}
+
+\pause
+
+\begin{example}
+\begin{itemize}
+ 	\item Consider the binary predicate constant $\geq$ over $\mathbb{N}$.
+	\pause
+	\item Consider further the formula $a \geq 3$.
+	\pause
+	\item $a$ is a free variable and 3 is a constant.
+	\pause
+	\item Now consider the formula $7 \geq 3$.
+	\pause
+	\item Furthermore, consider the formula ``for all $a \in \mathbb{N}$ holds: $a \geq 3$''
+\end{itemize}
+\end{example}
+\end{frame}
+
+\begin{frame}
+\frametitle{Quantifier}
+\begin{itemize}
+	\item The last example has shown that we need phrases like ``for all variables \ldots'' or ``there exists \ldots''.
+	\pause
+	\item For this purpose we have {\em Quantifiers} in mathematical logic.
+	\pause
+	\item Quantifiers bind variables in formulas of predicate logic.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Quantifier --- Definition}
+\begin{definition}
+The most important quantifiers are the {\em universal quantifier} and the {\em existential quantifier} which are written and spoken as follows:
+\begin{enumerate}
+	\item Universal Quantifier $\forall$
+	\begin{itemize}
+		\item $\forall x: P(x)$
+		\pause
+		\item for all $x$ holds $P$
+	\end{itemize}
+	\pause
+	\item Existential Quantifer $\exists$
+		\begin{itemize}
+			\item $\exists x: P(x)$
+			\pause
+			\item There exists (at least one) $x$ for which holds $P$
+		\end{itemize}
+\end{enumerate}
+\end{definition}
+
+\pause
+
+\begin{remark}
+In the sequel we will use the notations $\forall x: P(x)$ and $\exists x: P(x)$.
+\end{remark}
+\end{frame}
+
+\begin{frame}
+\frametitle{Free and Bound Variables}
+\begin{itemize}
+	\item Variables which are referred to by a quantifier are called {\em bound variables}.
+	\item All other variables are {\em free variables} unless they are bound by another quantifier.
+\end{itemize}
+
+\pause
+\begin{example}
+\begin{itemize}
+	\item Consider the formula ``$x$ has birthday in the same month as $y$''.
+	\item Let $x$ and $y$ denote students of the HTL Leonding.
+	\item $x$ and $y$ are both free variables.
+	\pause
+	\item $\exists x: x$ has birthday in the same month as $y$.
+	\item $x$ is a bound variable and $y$ is a free variable.
+\end{itemize}
+\end{example}
+\end{frame}
+
+\begin{frame}
+\frametitle{Quantified Formulas}
+\begin{enumerate}
+	\item The formula $\forall x: P(x)$ is true if and only if $P$ is true for every value of the universe that is assigned to $x$.
+	\pause
+	\item The formula $\exists x: P(x)$ is true if and only if $P$ is true for at least one value of the universe that is assigned to $x$.
+	\pause
+	\item The formulas $\forall x: P(x, y, z)$ and $\exists x: P(x, y, z)$ are formulas with free variables $y$ and $z$. Therefore, no
+	truth value can be determined for these formulas.
+\end{enumerate}
+\pause
+\begin{remark}
+\begin{itemize}
+	\item Since we can determine a truth value for the first and the second formula, we can call these formulas propositions.
+	\pause
+	\item The third remains a formula of predicate logic.
+\end{itemize}
+\end{remark}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Example}
+ \begin{example}
+ 
+\begin{itemize}
+	\item Let's consider the universe of all students of the HTL Leonding.
+        \item Further consider the formula ``$x$ attends the 3\textsuperscript{rd} grade''.
+	\pause
+	\item This formula has one free variable $x$.
+	\pause
+	\item ``$\forall x: $$x$ attends the 3\textsuperscript{rd} grade'' would only be true if all students of this school would attend the 3\textsuperscript{rd} grade.
+	\item ``$\exists x: $$x$ attends the 3\textsuperscript{rd} grade'' is true, since there exists at least one student at this school who attends the 3\textsuperscript{rd} grade.
+\end{itemize}
+\end{example}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Summary}
+ 
+ We know two possibilities to turn a formula of predicate logic into a proposition 
+\begin{enumerate}
+ 	\item Assignment of constants out of the universe to each free variable.
+	\item Binding the free variables with quantifiers.
+	\pause
+	\item Formulas with no free variables are propositions and are sometimes called {\em closed formulas}.
+	\item Only these have a truth value.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Relationships Between Negation and Quantifiers}
+	
+	\begin{theorem}
+		Let $P$ be a unary predicate constant and $x \in D$ a variable. Then the following relations hold:
+		\begin{align*}
+			\lnot \exists x: P(x) & \equiv \forall x: \lnot P(x) \\
+			\lnot \forall x: P(x) & \equiv \exists x: \lnot P(x)
+		\end{align*}
+	\end{theorem}
+	
+	\pause
+	
+	\begin{example}
+		\begin{align*}
+			\lnot \forall x \in \mathbb{N}: \text{isPrime}(x) \Rightarrow \text{odd}(x) \\
+			\exists x \in \mathbb{N}: \text{isPrime}(x) \land \lnot \text{odd}(x)
+		\end{align*}
+	\end{example}
+\end{frame}
+\end{document}
