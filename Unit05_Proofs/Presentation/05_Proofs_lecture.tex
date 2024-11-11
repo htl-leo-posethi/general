@@ -1,0 +1,149 @@
+\documentclass{beamer}
+%%% BEGIN PREAMBLE
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+% \usepackage{beamerthemesplit} // Activate for custom appearance
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+
+% Definitions
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% Title stuff
+\title{Unit 05 – Proofs}
+\author{Peter Bauer}
+\date{} % delete this line to display the current date
+
+%%% BEGIN DOCUMENT
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+	\frametitle{Outline}
+	\tableofcontents
+\end{frame}
+
+\section{Axioms}
+
+\begin{frame}
+ \frametitle{Axioms}
+ 
+\begin{definition}
+ {\em Axioms} are basic propositions or propositional formulas which are true (hold) from the beginning. They are normally accepted without any proof.
+\end{definition}
+
+\begin{example}
+\begin{itemize}
+	\item An equivalence relation $R$ is reflexive, symmetric, and transitive.
+	\item The composition $\land$ is associative, commutative, and distributive.
+\end{itemize}
+\end{example}
+\end{frame}
+
+\begin{frame}
+\frametitle{Proof Rules}
+Proof rules determine how you can make new true formulas from already existing true formulas.
+\end{frame}
+
+\section{Direct Proof}
+\begin{frame}
+\frametitle{Direct Proof}
+\begin{itemize}
+ 	\item Step-by-step conclusion
+	\item $(A \Rightarrow C) \land (C \Rightarrow B) \vdash (A \Rightarrow B)$
+\end{itemize}
+\pause
+\begin{example}
+ 
+\begin{enumerate}
+ \item If you own a longhair cat it will lose hairs
+ \pause
+ \item If somebody/something loses hairs, your couch will be (sooner or later) contaminated with hairs
+ \pause
+ \item If you own a longhair cat your couch will be (sooner or later) contaminated with hairs
+\end{enumerate}
+\end{example}
+
+\pause 
+
+\begin{remark}
+	A simplified but famous version of the direct proof is the so-called {\em Modus Ponens}:
+	$A \land (A \Rightarrow B) \vdash B$
+\end{remark}
+\end{frame}
+
+\section{Indirect Proof}
+\begin{frame}
+\frametitle{Indirect Proof (Modus Tollens)}
+	
+\begin{itemize}
+	\item $A \Rightarrow B$ has to be proven
+	\pause
+	\item Sometimes this turns out to be hard or even impossible to be proven
+	\pause
+	\item Therefore, we assume that $\lnot B$
+	\pause
+	\item Then we try to derive $\lnot A$
+	\pause
+	\item $A \Rightarrow B \equiv \lnot B \Rightarrow \lnot A$ 
+\end{itemize}
+
+\pause
+\begin{example}
+\begin{itemize}
+	 \item If it is the last school day of the year we get our final certificates.
+	 \pause
+	 \item This is logically equivalent to
+	 \pause
+	 \item If we do not get our final certificates it can't be the last school day of the year.
+\end{itemize}
+\end{example}
+\pause
+Prove the rule via truth table.
+\end{frame}
+
+\begin{frame}
+\frametitle{Modus Tollens -- A More Formal Example}
+\begin{example}
+\begin{itemize}
+	 \item $a \cdot b$ is even $\Rightarrow a$ is even or $b$ is even.
+	 \pause
+	 \item Assume that $a$ is odd and $b$ is odd
+	 \pause
+	 \item Show under this assumption that $a \cdot b$ must be odd
+	 %a . b = 2k => a = 2l or b = 2m. Assume a = 2l + 1 and b = 2m + 1. Show that there exists a k such that a . b == 2k + 1
+\end{itemize}
+\end{example}
+\end{frame}
+
+\section{Proof by Contradiction}
+\begin{frame}
+\frametitle{Proof by Contradiction}
+\begin{itemize}
+	\item $A \Rightarrow B$ has to be proven	
+	\pause
+	\item Assume $A$
+	\pause
+	\item Assume $\lnot B$
+	\pause
+	\item Then we try to proof a contradiction
+	\pause
+	\item $A \Rightarrow B \equiv A \land \lnot B \Rightarrow \text{{\bf F}}$
+	\pause
+	\item Prove this rule via a truth table
+\end{itemize}
+\pause
+\begin{example}
+\begin{itemize}
+	\item Prove that $a^2$ is even $\Rightarrow a$ is even
+	\item Assume that $a^2$ is even
+	\item Assume for the sake of contradiction that $a$ is odd
+	\item Then you can conclude that $a^2$ is odd, which is in contradiction to our first assumption
+	% If a should be odd it must be 2k + 1 for some arbitrary k. Then we could say that a^2 = (2k + 1)^2 = 4k^2 + 4k + 1 = 4k(4k + 1) + 1. Obviously 4k(k + 1) must be even (4 * x is even for any x), so 4k(4k + 1) + 1 must be odd which means that a^2 must be odd, which is in contradiction to our assumption that a^2 is even. 
+\end{itemize}
+\end{example}
+\end{frame}
+\end{document}

@@ -1,0 +1,81 @@
+\documentclass[a4paper,11pt]{exam}
+
+\pointpoints{\%}{\%}
+
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[german, english]{babel}
+\usepackage[utf8]{inputenc}
+
+\theoremstyle{definition}
+\newtheorem{remark}{Remark}
+\begin{document}
+
+\printanswers
+
+\begin{center} \fbox{\fbox{\parbox{5.5in}{\centering
+IF.05.22 --- Theoretical Informatics --- Proof Exercises}}}
+\end{center}
+%\makebox[\textwidth]{Name: \enspace\hrulefill}
+
+
+\newtheorem{theorem}{Theorem}
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+
+\begin{questions}
+\question{\bf Proof by Contradiction}
+Let $a, b \in \mathbb{Z}$. Proof the following proposition:
+\[a + b \geq 19 \Rightarrow a \geq 10 \lor b \geq 10.\]
+Take care to show every step of the proof carefully. How does such a proof look like, what do you assume, what do you have to show, where is the contradiction?
+
+\begin{otherlanguage}{german}
+Seien $a, b \in \mathbb{Z}$. Beweisen Sie folgende Aussage:
+\[a + b \geq 19 \Rightarrow a \geq 10 \lor b \geq 10.\]
+Beachten Sie, dass Sie jeden Beweisschritt sorgfältig protokollieren. Wie sieht so ein Beweis aus, was nehmen Sie an, was zeigen Sie, wo ist der Widerspruch?
+\end{otherlanguage}
+
+\question{\bf Indirect Proof}
+Let $a, b, c \in \mathbb{R}^+$. Proof the following proposition via an indirect proof:
+\[a \cdot b = c \Rightarrow a \leq \sqrt{c} \lor b \leq \sqrt{c}.\]
+Take care to show every step of the proof carefully. In particular accomplish the following tasks:
+\begin{parts}
+	\part Write down the general scheme of an indirect proof.
+	\part Write down the starting point to proof the above proposition indirectly.
+	\part Transform the starting point of your proof such that it becomes obvious in which range the required values for $a$ and $b$ are to be found.
+	\part Give values of $a$ and $b$ to be able to finalize the proof.
+	\part Finalize the proof.
+	\part Take care of a clear and mathematically oriented structure of your proof.
+\end{parts}
+{\bf Hint:} If you need to express a real number $x > a$ you may assume an infinitely small number $\varepsilon > 0$ to construct it.
+
+\begin{otherlanguage}{german}
+Seien $a, b, c \in \mathbb{R}^+$. Beweisen Sie folgende Aussage mit Hilfe eines indirekten Beweises:
+\[a \cdot b = c \Rightarrow a \leq \sqrt{c} \lor b \leq \sqrt{c}.\]
+\begin{parts}
+	\part Geben Sie die allgemeine Form eines indirekten Beweises an.
+	\part Geben Sie den Ansatz für einen indirekten Beweis der obigen Behauptung.
+	\part Formen Sie den Ansatz so um, dass offensichtlich wird, in welchem Bereich Werte für $a$ und $b$ gesucht sind.
+	\part Bestimmen Sie Werte für $a$ and $b$, mit denen Sie den Beweis fertigstellen können.
+	\part Stellen Sie den Beweis fertig.
+	\part Achten Sie auf eine klare, mathematikorientierte Struktur Ihres Beweises.
+\end{parts}
+{\bf Hint:} Falls Sie eine reelle Zahl $x > a$ für Ihren Beweis brauchen, dürfen Sie annehmen, dass es eine unendlich kleine Zahl $\varepsilon > 0$ mit der Sie $x$ dann konstruieren können.
+\end{otherlanguage}
+\begin{solution}
+	\begin{parts}
+		\part $A \Rightarrow B \equiv \lnot B \Rightarrow \lnot A$
+		\part $\lnot (a \leq \sqrt{c} \lor b \leq \sqrt{c}) \Rightarrow a \cdot b \neq c$
+		\part Using DeMorgan we can rewrite the above formula to ($a > \sqrt{c} \land b > \sqrt{c}) \Rightarrow a \cdot b \neq c$
+		\part We are looking for the smallest number $a$ and $b$ both $> \sqrt{c}$. So we assume a number $\varepsilon > 0$ and let $a, b = \sqrt{c + \varepsilon}$.
+		\part In order to proof that $a \cdot b \neq c$ under the above condition it is sufficient to show that $\sqrt{c + \varepsilon} \cdot \sqrt{c + \varepsilon} \neq c$.
+		
+		$\sqrt{c + \varepsilon} \cdot \sqrt{c + \varepsilon} = (\sqrt{c + \varepsilon})^2 = c + \varepsilon$ which is obviously unequal to $c$.
+	\end{parts}
+\end{solution}
+
+\end{questions}
+
+\end{document}
