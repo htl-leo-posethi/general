@@ -46,3 +46,4 @@ In this unit we will reconsider proofs. With our new knowledge gained from the p
 Class Material
 - [Handout](./Unit05_Proofs/Presentation/05_Proofs_lecture.pdf)
 - [Graded Exercise](./Unit05_Proofs/Exercises/Exercise5/ExerciseProofs.pdf)
+- [More Examples](./Unit05_Proofs/Exercises/Exercise5MoreExamples/Exercise5MoreExamples.pdf)
