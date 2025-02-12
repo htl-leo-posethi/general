@@ -51,4 +51,9 @@ Class Material
 ### Unit 6 - Prolog Basics
 In this unit we will familiarize ourselves with *Prolog* a programming language purely based on a logical calculus. You may find things a bit unclear at the beginning since the language misses the usual conditional and looping constructs but at the end you will be able to see the strengths of this approach.
 
-Class Material: The instructions as well as the assignment can be found in the following [repository](https://github.com/htl-leo-posethi/coding-assignment2-prolog-basics).
+Class Material: The instructions as well as the assignment can be found in the [following repository](https://github.com/htl-leo-posethi/coding-assignment2-prolog-basics).
+
+### Unit 7 - Prolog Recursion and Lists
+In this unit we are repeating recursion and how this is done in Prolog. Based on this we can start working with lists and learn the power of this concept in Prolog.
+
+Class Material: Again both, instructions and assignment, can be found in [another repository](https://github.com/htl-leo-posethi/coding-assignment3-prolog-recursion-and-lists.git).
