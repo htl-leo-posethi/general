@@ -47,3 +47,8 @@ Class Material
 - [Handout](./Unit05_Proofs/Presentation/05_Proofs_lecture.pdf)
 - [Graded Exercise](./Unit05_Proofs/Exercises/Exercise5/ExerciseProofs.pdf)
 - [More Examples](./Unit05_Proofs/Exercises/Exercise5MoreExamples/Exercise5MoreExamples.pdf)
+
+### Unit 6 - Prolog Basics
+In this unit we will familiarize ourselves with *Prolog* a programming language purely based on a logical calculus. You may find things a bit unclear at the beginning since the language misses the usual conditional and looping constructs but at the end you will be able to see the strengths of this approach.
+
+Class Material: The instructions as well as the assignment can be found in the following [repository](https://github.com/htl-leo-posethi/coding-assignment2-prolog-basics).
