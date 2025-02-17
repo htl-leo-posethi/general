@@ -58,4 +58,6 @@ Class Material:
 ### Unit 7 - Prolog Recursion and Lists
 In this unit we are repeating recursion and how this is done in Prolog. Based on this we can start working with lists and learn the power of this concept in Prolog.
 
-Class Material: Again both, instructions and assignment, can be found in [another repository](https://github.com/htl-leo-posethi/coding-assignment3-prolog-recursion-and-lists.git).
+Class Material:
+- [Handout](./Unit07_PrologLists/RecursionAndLists.md)
+- [Graded Exercise](./Unit07_PrologLists/CodingAssignment.md)
