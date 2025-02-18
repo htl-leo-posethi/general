@@ -1,6 +1,7 @@
 /* Template from https://www.amzi.com/AdventureInProlog/appendix.php and heavily simplified. */
 
 :- dynamic((i_am_at/1, at/2, holding/1), alive/1).
+:- include('Inventory.pl').
 
 i_am_at(someplace).
 
@@ -8,41 +9,6 @@ path(someplace, n, someplace).
 
 at(thing, someplace).
 at(anotherthing, someplace).
-
-/* These rules describe how to pick up an object. */
-
-take(X) :-
-        holding(X),
-        write('You''re already holding it!'),
-        !, nl.
-
-take(X) :-
-        i_am_at(Place),
-        at(X, Place),
-        retract(at(X, Place)),
-        asserta(holding(X)),
-        write('OK.'),
-        !, nl.
-
-take(_) :-
-        write('I don''t see it here.'),
-        nl.
-
-
-/* These rules describe how to put down an object. */
-
-drop(X) :-
-        holding(X),
-        i_am_at(Place),
-        retract(holding(X)),
-        asserta(at(X, Place)),
-        write('OK.'),
-        !, nl.
-
-drop(_) :-
-        write('You aren''t holding it!'),
-        nl.
-
 
 /* These rules define the direction letters as calls to go/1. */
 
@@ -87,13 +53,6 @@ notice_objects_at(Place) :-
         fail.
 
 notice_objects_at(_).
-
-inventory :-
-        holding(X),
-        write('You are holding: '), write(X), nl,
-        fail.
-
-inventory :- \+ holding(_), write('You have no inventory').
 
 /* This rule tells how to die. */
 
