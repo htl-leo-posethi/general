@@ -1,4 +1,4 @@
-
+:- dynamic(holding/1).
 
 /* These rules describe how to pick up an object. */
 

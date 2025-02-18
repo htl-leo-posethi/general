@@ -1,6 +1,6 @@
 /* Template from https://www.amzi.com/AdventureInProlog/appendix.php and heavily simplified. */
 
-:- dynamic((i_am_at/1, at/2, holding/1), alive/1).
+:- dynamic((i_am_at/1, at/2, alive/1)).
 :- include('Inventory.pl').
 
 i_am_at(someplace).
