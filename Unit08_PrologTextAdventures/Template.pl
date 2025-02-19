@@ -1,14 +1,11 @@
 /* Template from https://www.amzi.com/AdventureInProlog/appendix.php and heavily simplified. */
-
-:- dynamic((i_am_at/1, at/2, alive/1)).
 :- include('Inventory.pl').
+:- include('World.pl').
 
-i_am_at(someplace).
+:- dynamic((i_am_at/1, alive/1)).
 
-path(someplace, n, someplace).
+i_am_at('my house').
 
-at(thing, someplace).
-at(anotherthing, someplace).
 
 /* These rules define the direction letters as calls to go/1. */
 
@@ -97,4 +94,4 @@ start :-
 /* These rules describe the various rooms.  Depending on
    circumstances, a room may have more than one description. */
 
-describe(someplace) :- write('You are someplace.'), nl.
+describe(Place) :- write('You are '), write(Place), nl.

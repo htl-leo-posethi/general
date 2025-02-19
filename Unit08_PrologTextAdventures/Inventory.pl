@@ -36,7 +36,7 @@ drop(_) :-
 
 inventory :-
         holding(X),
-        write('You are holding: '), write(X), nl,
+        write('You are holding: '), write(X), nl, !,
         fail.
 
 inventory :- \+ holding(_), write('You have no inventory').
