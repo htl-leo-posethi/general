@@ -10,7 +10,8 @@ look :-
         iAmAt(Place),
         describe(Place),
         nl,
-        notice_objects_at(Place),
+        notice_objects_at(Place), nl,
+        noticeSurrounding(Place),
         nl.
 
 /* These rules describe the various rooms.  Depending on
@@ -27,6 +28,13 @@ notice_objects_at(Place) :-
         fail.
 
 notice_objects_at(_).
+
+noticeSurrounding(Place) :-
+    path(Place, Direction, Location),
+    cardinalPoint(Direction, DirectionName),
+    write('There is a path to the '), write(DirectionName), write(' to '), write(Location), nl, fail.
+
+
 
 /* This rule tells how to die. */
 

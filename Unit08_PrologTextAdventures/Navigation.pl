@@ -26,3 +26,8 @@ go(Direction) :-
 
 go(_) :-
         write('You can''t go that way.').
+
+cardinalPoint(n, 'north').
+cardinalPoint(s, 'south').
+cardinalPoint(e, 'east').
+cardinalPoint(w, 'west').
