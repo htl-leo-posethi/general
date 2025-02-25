@@ -13,11 +13,11 @@ take(X) :-
         at(X, Place),
         retract(at(X, Place)),
         asserta(holding(X)),
-        write('OK.'),
+        write('👍 OK.'),
         !, nl.
 
 take(_) :-
-        write('I don''t see it here.'),
+        write('💩 I don''t see it here.'),
         nl.
 
 
@@ -28,17 +28,17 @@ drop(X) :-
         iAmAt(Place),
         retract(holding(X)),
         asserta(at(X, Place)),
-        write('OK.'),
+        write('👍 OK.'),
         !, nl.
 
 drop(_) :-
-        write('You aren''t holding it!'),
+        write('😢 You aren''t holding it!'),
         nl.
 
 inventory :-
         holding(X),
-        write('You are holding: '), write(X), nl, !,
+        write('You are holding: '), write(X), nl,
         fail.
 
-inventory :- \+ holding(_), write('You have no inventory').
+inventory :- \+ holding(_), write('🚫 You have no inventory').
 

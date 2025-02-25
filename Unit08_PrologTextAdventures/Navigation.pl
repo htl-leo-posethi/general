@@ -25,7 +25,7 @@ go(Direction) :-
         !, look.
 
 go(_) :-
-        write('You can''t go that way.').
+        write('⛔ You can''t go that way.').
 
 cardinalPoint(n, 'north').
 cardinalPoint(s, 'south').

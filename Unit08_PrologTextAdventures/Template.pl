@@ -1,7 +1,5 @@
 /* Template from https://www.amzi.com/AdventureInProlog/appendix.php and heavily simplified. */
-:- include('Inventory.pl').
-:- include('World.pl').
-:- include('Navigation.pl').
+:- include('Player.pl').
 
 /* Under UNIX, the "halt." command quits Prolog but does not
    remove the output window. On a PC, however, the window
@@ -16,7 +14,7 @@ finish :-
 
 /* This rule just writes out game instructions. */
 
-instructions :-
+help :-
         nl,
         write('Enter commands using standard Prolog syntax.'), nl,
         write('Available commands are:'), nl,
@@ -25,7 +23,8 @@ instructions :-
         write('take(Object).      -- to pick up an object.'), nl,
         write('drop(Object).      -- to put down an object.'), nl,
         write('look.              -- to look around you again.'), nl,
-        write('instructions.      -- to see this message again.'), nl,
+        write('help.              -- to see this message again.'), nl,
+        write('inventory.         -- to list the objects you are holding.'), nl,
         write('halt.              -- to end the game and quit.'), nl,
         nl.
 
@@ -33,5 +32,5 @@ instructions :-
 /* This rule prints out instructions and tells where you are. */
 
 start :-
-        instructions,
+        help,
         look.
