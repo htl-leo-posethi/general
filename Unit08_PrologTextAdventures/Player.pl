@@ -1,6 +1,7 @@
 :- dynamic((player/3, alive/1)).
 :- include('Navigation.pl').
 :- include('Inventory.pl').
+:- include('Enemy.pl').
 
 player('john doe', 'my house', 20).
 
@@ -10,6 +11,7 @@ look :-
         iAmAt(Place),
         describe(Place),
         nl,
+        enemyIsThere(Place),
         notice_objects_at(Place), nl,
         noticeSurrounding(Place),
         nl.

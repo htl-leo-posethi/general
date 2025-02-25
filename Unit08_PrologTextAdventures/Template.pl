@@ -32,5 +32,6 @@ help :-
 /* This rule prints out instructions and tells where you are. */
 
 start :-
+        randomize,
         help,
         look.
