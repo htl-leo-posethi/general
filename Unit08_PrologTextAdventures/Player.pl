@@ -1,0 +1,34 @@
+:- dynamic((player/3, alive/1)).
+:- include('Navigation.pl').
+:- include('Inventory.pl').
+
+player('john doe', 'my house', 20).
+
+/* This rule tells how to look about you. */
+
+look :-
+        iAmAt(Place),
+        describe(Place),
+        nl,
+        notice_objects_at(Place),
+        nl.
+
+/* These rules describe the various rooms.  Depending on
+   circumstances, a room may have more than one description. */
+
+describe(Place) :- write('Your location: '), write(Place), nl.
+
+/* These rules set up a loop to mention all the objects
+   in your vicinity. */
+
+notice_objects_at(Place) :-
+        at(X, Place),
+        write('There is a '), write(X), write(' here.'), nl,
+        fail.
+
+notice_objects_at(_).
+
+/* This rule tells how to die. */
+
+die :-
+        finish.

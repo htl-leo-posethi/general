@@ -1,3 +1,4 @@
+:- include('World.pl').
 :- dynamic(holding/1).
 
 /* These rules describe how to pick up an object. */
@@ -8,7 +9,7 @@ take(X) :-
         !, nl.
 
 take(X) :-
-        i_am_at(Place),
+        iAmAt(Place),
         at(X, Place),
         retract(at(X, Place)),
         asserta(holding(X)),
@@ -24,7 +25,7 @@ take(_) :-
 
 drop(X) :-
         holding(X),
-        i_am_at(Place),
+        iAmAt(Place),
         retract(holding(X)),
         asserta(at(X, Place)),
         write('OK.'),

@@ -26,3 +26,5 @@ path(From, w, To) :- path(To, e, From).
 
 at(thing, garden).
 at(anotherthing, 'my house').
+at('a third thing', 'my house').
+at('a fourth thing', 'my house').
