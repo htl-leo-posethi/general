@@ -14,4 +14,13 @@
    -  `>` for greater
 
 ## Other Stuff
-- Emojis: https://1000logos.net/emoji-copy-and-paste/
+### Emojis
+... can be found under: https://1000logos.net/emoji-copy-and-paste/
+
+### Formatted Output
+Instead of consecutive calls of `write/1` it is more convenient to use the pre-defined `format/2` clause. `format("~w and ~w are forbidden to take~n", [Object1, Object2])` is equivalent to
+
+```Prolog
+write(Object1), write(' and '), write(Object2),
+write(' are forbidden to take'), nl
+```

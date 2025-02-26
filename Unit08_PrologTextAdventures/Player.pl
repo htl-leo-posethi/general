@@ -6,13 +6,7 @@
 
 player('john doe', 'my house', 20).
 
-/* This rule tells how to look about you. */
-
-/*look :-
-        iAmAt(Place),
-%        placeEnemyAt(Place),
-        describeCurrentSituation(Place).*/
-
+/* This rule tells how to look around you. */
 look :- iAmAt(Place), describeCurrentSituation(Place).
 
 describeCurrentSituation(Place) :-
@@ -23,7 +17,7 @@ describeCurrentSituation(Place) :-
 /* These rules describe the various rooms.  Depending on
    circumstances, a room may have more than one description. */
 
-describe(Place) :- write('Your location: '), write(Place), nl.
+describe(Place) :- format("Your location: ~w.~n", [Place]).
 
 /* These rules set up a loop to mention all the objects
    in your vicinity. */
@@ -35,15 +29,17 @@ noticeObjectsAt(Place) :-
 
 noticeObjectsAt(_).
 
-describeObject(enemy(Icon, Enemy, _, _)) :- !, write(Icon), write(' '), write('🛑:  A '), write(Enemy), write(' is approaching you!'), nl.
-describeObject(X) :- write('🪑There is a '), write(X), write(' here.'), nl.
+describeObject(enemy(Icon, Enemy, Health, Strength)) :-
+    !,
+    format("~w 🛑:  A ~w with health ~w and strength ~w is approaching you!~n", [Icon, Enemy, Health, Strength]).
+
+describeObject(X) :- format("There is a ~w here.~n", [X]).
 
 noticeSurrounding(Place) :-
     path(Place, Direction, Location),
     cardinalPoint(Direction, DirectionName),
-    write('There is a path to the '), write(DirectionName), write(' to '), write(Location), nl, fail.
-
-
+    format("There is a path to the ~w to ~w.~n", [DirectionName, Location]),
+    fail.
 
 /* This rule tells how to die. */
 
