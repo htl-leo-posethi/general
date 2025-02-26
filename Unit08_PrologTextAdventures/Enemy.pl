@@ -1,17 +1,17 @@
-enemy('Dragon', 50, 10). % Name, Health, Damage
-enemy('Goblin', 20, 5).
-enemy('Orc', 30, 7).
-enemy('Troll', 40, 8).
-enemy('Skeleton', 15, 4).
-enemy('Zombie', 25, 6).
+enemy('🐲', 'Dragon', 50, 10). % Icon, Name, Health, Damage
+enemy('👺', 'Goblin', 20, 5).
+enemy('👹', 'Ogre', 30, 7).
+enemy('👽', 'Alien', 40, 8).
+enemy('💀', 'Skeleton', 15, 4).
+enemy('🧟', 'Zombie', 25, 6).
 
-% This rule tells if an enemy is in the same place as the player
-enemyIsThere(Place) :-
+% Place an enemy with the probability of 30%
+placeEnemyAt(Place) :-
     random(1, 3, RandomNumber),
     RandomNumber =:= 1,
-    enemy(Enemy, _, _),
+    enemy(Icon, Enemy, Health, Damage),
     iAmAt(Place),
-    asserta(at(enemy(Enemy, _, _), Place)), !.
+    asserta(at(enemy(Icon, Enemy, Health, Damage), Place)), !.
 
 % This rule tells how to attack an enemy
 attack(Enemy) :-
