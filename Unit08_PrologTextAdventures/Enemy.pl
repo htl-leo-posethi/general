@@ -9,9 +9,16 @@ enemy('🧟', 'Zombie', 25, 6).
 placeEnemyAt(Place) :-
     random(1, 3, RandomNumber),
     RandomNumber =:= 1,
-    enemy(Icon, Enemy, Health, Damage),
+    randomEnemy(Enemy),
     iAmAt(Place),
-    asserta(at(enemy(Icon, Enemy, Health, Damage), Place)), !.
+    asserta(at(Enemy, Place)), !.
+
+% Select a random enemy
+randomEnemy(Enemy) :-
+    findall(enemy(Icon, Enemy, Health, Damage), enemy(Icon, Enemy, Health, Damage), Enemies),
+    length(Enemies, Length),
+    random(0, Length, RandomNumber),
+    nth0(RandomNumber, Enemies, Enemy).
 
 % This rule tells how to attack an enemy
 attack(Enemy) :-

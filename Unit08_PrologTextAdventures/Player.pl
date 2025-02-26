@@ -35,7 +35,7 @@ noticeObjectsAt(Place) :-
 
 noticeObjectsAt(_).
 
-describeObject(enemy(Icon, Enemy, _, _)) :- !, write(Icon), write(' '), write('There is a '), write(Enemy), write(' here.'), nl.
+describeObject(enemy(Icon, Enemy, _, _)) :- !, write(Icon), write(' '), write('🛑:  A '), write(Enemy), write(' is approaching you!'), nl.
 describeObject(X) :- write('🪑There is a '), write(X), write(' here.'), nl.
 
 noticeSurrounding(Place) :-
