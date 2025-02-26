@@ -1,4 +1,12 @@
 # Unit 8 - Programming Text Adventures in Prolog
+## Playing Around
+```
+cd GameTemplate
+gprolog
+| ?- placeEnemyAt('myHouse').
+yes
+| ?- look.
+```
 ## Separating the Source Base
 In order to structure the source base it is possible to separate the code into different files. To include the content of a file into another file the predicate `include/1` is used. Example:
 
