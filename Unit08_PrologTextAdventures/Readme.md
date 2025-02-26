@@ -7,6 +7,11 @@ In order to structure the source base it is possible to separate the code into d
 ```
 This command replaces the above given line by the source text of `Library.pl`. This is similar as the `#include <...>` you know from C. Take care that Prolog does not provide a mechanism to prevent multiple includes. One has to track this manually.
 
+## Debugging
+The more complex programs grow the more important is to see how they are executed. Prolog can be turned into debugging mode by calling the predicate `trace/0`. In this mode the execution of predicates is shown step by step. Next step is shown by hitting return. A debug run of a predicate can be aborted by hitting `a`.
+
+To turn off debugging mode the predicate `notrace/0` must be called.
+
 ## Managing Data aka Dynamic Predicates
 We have seen that a Prolog program is a logicbase of predicates, and so far we have entered clauses for those predicates directly in our programs. Prolog also allows us to manipulate the logicbase directly and provides built-in predicates to perform this function. The main ones are:
 
@@ -34,6 +39,20 @@ Note that we have to declare the predicate `player/3` to be dynamic (first line)
 Sometimes it is desirable to selectively turn off backtracking. Prolog provides a predicate that performs this function. It is called the cut, represented by an exclamation mark (!).
 
 The cut effectively tells Prolog to freeze all the decisions made so far in this predicate. That is, if required to backtrack, it will automatically fail without trying other alternatives.
+
+As an example we want to consider the following implementation of the predicate `max/3`:
+
+```Prolog
+max(X, Y, X) :-
+    X >= Y.
+
+max(X, Y, Y).
+```
+When querying `max(3, 5, Z).` no harm can be detected since the first definition fails (`X >= Y` fails and therefore the whole predicate fails). Due to backtracking the second definition is called which gives the expected result.
+
+`max(5, 3, Z).` however behaves harmfully. We get the correct result `Z = 5` (by evaluating the first definition) but it keeps stuck in backtracking and also evaluates the second definition which results in `Z = 3` which does not make sense.
+
+In this case we have to prevent Prolog from backtracking which is done by the cut. We end up in a definition as shown in [Cut.pl](./Cut.pl).
 
 ## Random Numbers
 - Initialize the random number generator by calling `randomize/1` at the beginning of a program
