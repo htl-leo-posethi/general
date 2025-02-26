@@ -61,3 +61,9 @@ In this unit we are repeating recursion and how this is done in Prolog. Based on
 Class Material:
 - [Handout](./Unit07_PrologLists/RecursionAndLists.md)
 - [Graded Exercise](./Unit07_PrologLists/CodingAssignment.md)
+
+### Unit 8 - Prolog Text Adventures
+In this unit we will deepen our understanding of Prolog and get some hints how to write an adventure game in Prolog
+
+Class Material:
+- [Handout](./Unit08_PrologTextAdventures/Readme.md)
