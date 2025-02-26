@@ -4,7 +4,7 @@
 :- include('Inventory.pl').
 :- include('Enemy.pl').
 
-player('john doe', 'my house', 20).
+player('john doe', 'my house', 20). % Name, Location, Health
 
 /* This rule tells how to look around you. */
 look :- iAmAt(Place), describeCurrentSituation(Place).
@@ -12,10 +12,7 @@ look :- iAmAt(Place), describeCurrentSituation(Place).
 describeCurrentSituation(Place) :-
     describe(Place), nl,
     noticeObjectsAt(Place), nl,
-    noticeSurrounding(Place), nl.
-
-/* These rules describe the various rooms.  Depending on
-   circumstances, a room may have more than one description. */
+    noticeSurroundingOf(Place), nl.
 
 describe(Place) :- format("Your location: ~w.~n", [Place]).
 
@@ -35,7 +32,7 @@ describeObject(enemy(Icon, Enemy, Health, Strength)) :-
 
 describeObject(X) :- format("There is a ~w here.~n", [X]).
 
-noticeSurrounding(Place) :-
+noticeSurroundingOf(Place) :-
     path(Place, Direction, Location),
     cardinalPoint(Direction, DirectionName),
     format("There is a path to the ~w to ~w.~n", [DirectionName, Location]),

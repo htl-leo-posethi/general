@@ -1,10 +1,5 @@
 iAmAt(Location) :- player('john doe', Location, _).
 
-newLocation(Location) :-
-    player('john doe', _, CurrentHealth),
-    retract(player(_, _, _)),
-    asserta(player('john doe', Location, CurrentHealth)).
-
 /* These rules define the direction letters as calls to go/1. */
 
 n :- go(n).
@@ -21,11 +16,16 @@ w :- go(w).
 go(Direction) :-
         iAmAt(Here),
         path(Here, Direction, There),
-        newLocation(There),
+        setNewLocation(There),
         !, look.
 
 go(_) :-
         write('⛔ You can''t go that way.').
+
+setNewLocation(Location) :-
+    player('john doe', _, CurrentHealth),
+    retract(player(_, _, _)),
+    asserta(player('john doe', Location, CurrentHealth)).
 
 cardinalPoint(n, 'north').
 cardinalPoint(s, 'south').
