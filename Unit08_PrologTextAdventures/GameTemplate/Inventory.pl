@@ -36,9 +36,15 @@ drop(_) :-
         nl.
 
 inventory :-
+        holding(_),
+        write('You are holding: '), nl,
+        listAllPossessions, !.
+
+inventory :- write('🚫 You have no inventory').
+
+listAllPossessions :-
         holding(X),
-        write('You are holding: '), write(X), nl,
+        write(X), nl,
         fail.
 
-inventory :- \+ holding(_), write('🚫 You have no inventory').
-
+listAllPossessions.
