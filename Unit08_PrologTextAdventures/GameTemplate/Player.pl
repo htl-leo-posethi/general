@@ -27,8 +27,8 @@ noticeObjectsAt(Place) :-
 noticeObjectsAt(_).
 
 describeObject(enemy(Icon, Enemy, Health, Strength)) :-
-    !,
-    format("~w 🛑:  A ~w with health ~w and strength ~w is approaching you!~n", [Icon, Enemy, Health, Strength]).
+    format("~w 🛑:  A ~w with health ~w and strength ~w is approaching you!~n",
+        [Icon, Enemy, Health, Strength]), !.
 
 describeObject(X) :- format("There is a ~w here.~n", [X]).
 
@@ -38,6 +38,7 @@ noticeSurroundingOf(Place) :-
     format("There is a path to the ~w to ~w.~n", [DirectionName, Location]),
     fail.
 
+noticeSurroundingOf(_).
 /* This rule tells how to die. */
 
 die :-
