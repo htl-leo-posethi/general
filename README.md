@@ -62,7 +62,7 @@ Class Material:
 - [Handout](./Unit07_PrologLists/RecursionAndLists.md)
 - [Graded Exercise](./Unit07_PrologLists/CodingAssignment.md)
 
-### Unit 8 - Prolog Text Adventures
+### Project - Prolog Text Adventures
 In this unit we will deepen our understanding of Prolog and get some hints how to write an adventure game in Prolog
 
 Class Material:
