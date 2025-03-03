@@ -66,4 +66,4 @@ Class Material:
 In this unit we will deepen our understanding of Prolog and get some hints how to write an adventure game in Prolog
 
 Class Material:
-- [Handout](./Unit08_PrologTextAdventures/Readme.md)
+- [Handout](./Project_PrologTextAdventures/Readme.md)
