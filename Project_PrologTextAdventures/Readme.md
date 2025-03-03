@@ -81,10 +81,47 @@ write(' are forbidden to take'), nl
 
 ## Playground
 
-```
-cd GameTemplate
-gprolog
-| ?- placeEnemyAt('myHouse').
+```Prolog
+> cd GameTemplate
+> gprolog
+| ?- ['Template.pl'].
+compiling .../Template.pl for byte code...
+.../Template.pl compiled, 231 lines read - 27017 bytes written, 9 ms
+
+(2 ms) yes
+| ?- start.
+
+Enter commands using standard Prolog syntax.
+Available commands are:
+start.             -- to start the game.
+n.  s.  e.  w.     -- to go in that direction.
+take(Object).      -- to pick up an object.
+drop(Object).      -- to put down an object.
+look.              -- to look around you again.
+help.              -- to see this message again.
+inventory.         -- to list the objects you are holding.
+halt.              -- to end the game and quit.
+
+Your location: my house.
+
+There is a anotherthing here.
+There is a a third thing here.
+There is a a fourth thing here.
+
+There is a path to the south to garden.
+yes
+| ?- placeEnemyAt('my house').
 yes
 | ?- look.
+Your location: my house.
+
+👽 🛑:  A Alien with health 40 and strength 8 is approaching you!
+There is a anotherthing here.
+There is a a third thing here.
+There is a a fourth thing here.
+
+There is a path to the south to garden.
+
+
+yes
 ```
