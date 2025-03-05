@@ -67,3 +67,9 @@ In this unit we will deepen our understanding of Prolog and get some hints how t
 
 Class Material:
 - [Handout](./Project_PrologTextAdventures/Readme.md)
+
+### Unit 8 - Formal Languages Basic  Terminology
+In this unit we will get a first contact with formal languages. We gained already some familiarity with the concept of syntax when we analyzed the structure of predicate logic formulas in unit 4. Now we lay the ground for a deeper dive into this topic.
+
+Class Material:
+- [Handout](./Unit08_FormalLanguagesBasics/01_Lecture/01_Terminology_lecture.pdf)
