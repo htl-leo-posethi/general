@@ -81,4 +81,4 @@ In this unit we will discuss a specific class of formal languages, namely regula
 
 Class Material:
 - [Handout](./Unit09_RegularLanguagesDFA/)
-- [Graded Exercise and Further Training Examples](./Unit09_RegularLanguagesDFA/02_Exercises/RegularLanguages.pdf): we discuss the examples a, b, c, and d for the graded exercise. All other examples can be used to prepare for tests and quizzes.
+- [Graded Exercise and Further Training Examples](./Unit09_RegularLanguagesDFA/02_Exercises/RegularLanguages.pdf): we discuss the examples 1, 5, 7, and 8 for the graded exercise. All other examples can be used to prepare for tests and quizzes.
