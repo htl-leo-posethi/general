@@ -1,0 +1,300 @@
+\documentclass[a4paper]{exam}
+%%% BEGIN PREAMBLE
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+%\usepackage{vaucanson-g}
+% \usepackage{beamerthemesplit} // Activate for custom appearance
+\usepackage[german, english]{babel}
+\usepackage[utf8]{inputenc}
+
+% Definitions
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{example}{Example}
+
+\newcommand{\emptystring}{$\varepsilon$}
+\newcommand{\length}[1]{\mid #1 \mid}
+\newcommand{\directlygenerates}{\Rightarrow}
+\newcommand{\generates}{\Rightarrow^{+}}
+\newcommand{\generatesequal}{\Rightarrow^{*}}
+
+\newenvironment{grammar}
+	{\begin{tabular}[b]{lcl}}
+	{\end{tabular}}
+\newcommand{\rewritten}{$\to$}
+\newcommand{\alternative}{$\mid \;$}
+
+% Title stuff
+\title{Regular Languages --- Exercises}
+\author{Peter Bauer}
+\date{Version\_01.01.02} % delete this line to display the current date
+
+%%% BEGIN DOCUMENT
+\begin{document}
+
+%\printanswers
+
+\begin{center} \fbox{\fbox{\parbox{5.5in}{\centering
+IF.04.22 LOAL --- Exercises --- Regular Languages and DFA}}}
+\end{center}
+%\makebox[\textwidth]{Name: \enspace\hrulefill}
+
+\begin{questions}
+\question
+	\textbf{Interpreting a Regular Expression}
+	
+	Find the shortest string $\omega \in \{a, b\}^*$ that is not in the language represented by the regular expression $a^*(ab)^*b^*$. Give
+	reasons for your answer.
+	
+\question
+	\textbf{Interpreting a Regular Expression}
+	Consider the regular expression $(a(cd)^*b)^*$.
+	\begin{parts}
+		\part Find a string of length 2 over $\{a, b, c, d\}$ which matches the expression.
+		\part Find a string of length 1 over $\{a, b, c, d\}$ which does not match the expression.
+	\end{parts}
+	
+	\begin{otherlanguage}{german}
+		Finden Sie für den oben angegebenen regulären Ausdruck
+		\begin{parts}
+			\part einen String der Länge 2 mit den Symbolen $\{a, b, c, d\}$, welcher als gültig erkannt wird
+			\part einen String der Länge 1 mit den Symbolen $\{a, b, c, d\}$, welcher als ungültig erkannt wird
+		\end{parts}
+	\end{otherlanguage}
+\question
+	\textbf{Interpreting a Regular Expression}
+	
+	Describe in an English sentence (as simple as possible) the language corresponding to the regular expression:
+	
+	$(b + ab)^*(a + ab)^*$.
+
+\begin{otherlanguage}{german}
+	Beschreiben Sie in einem möglichst einfachen deutschen Satz die Sprache des oben gegebenen regulären Ausdrucks.
+\end{otherlanguage}
+
+\begin{solution}
+A sequence of $b$s preceded or interrupted by single $a$s followed by a sequence of $a$s interrupted by single $b$s or empty.
+\end{solution}
+
+\section{C, C\#, Java Comments}
+\question
+	\textbf{Comments}
+		In C, C\#, or Java comments can be given in the form {\tt /* This is the comment */}. This means that comments start
+		with the string {\tt /*} and end with the string {\tt */}. The comment itself can be an arbitrary string with the exception that
+		the string {\tt */} must not occur.
+		
+		More precisely we could say that the language of a comment is now the string starting with ``/'' followed by a ``*'' followed by an arbitrary long sequence of characters except the sequence ``*/'' and ending with the sequence ``*/''. You may write $\alpha - \{$``x''$\}$ to denote a set of characters excluding one specific character ``x''.
+		
+\begin{parts}
+	\item Give a state diagram of a DFA which can parse this language.
+	\item Give a regular grammar which describes the language of C comments.
+	\item Describe this language by a regular set.
+	\item Is it possible to describe nested comments, e.g., {\tt /* This is a /* nested */ comment */}, by a regular expression? Give arguments for your decision.
+\end{parts}
+		
+\begin{otherlanguage}{german}
+In C, C\# oder Java gibt es die Blockkommentare, welche in \verb$/*$ und \verb$*/$ eingeschlossen sind. Der Kommentar selbst kann eine beliebige Zeichenkette sein, welche nur dadurch eingeschränkt ist, dass sie die Sequenz \verb$*/$ nicht beinhalten darf.
+
+\begin{parts}
+	\item Geben Sie das Zustandsdiagramm eines DFA an, der diese Sprache erkennt.
+	\item Geben Sie die dazugehörige reguläre Grammatik an.
+	\item Geben Sie den dazugehörigen regulären Ausdruck an.
+	\item Ist es möglich, geschachtelte Kommentare in Form eines regulären Ausdrucks zu beschreiben? Begründen Sie Ihre Antwort.
+\end{parts}
+
+\end{otherlanguage}
+
+\begin{solution}
+	We denote the character class of all valid characters for a program code by $a$. Let's define the following character classes:
+	
+	\begin{align}
+		s &= a - \{"/"\} \\
+		e & = a - \{"*"\} \\
+		c &= a - \{"*", "/"\} \\
+		r &= a - \{"/"\}
+	\end{align}
+
+	Then the grammar looks like this:
+
+	\begin{grammar}
+		S & \rewritten & sS \alternative /A \\
+		A & \rewritten & eS \alternative *C \\
+		C & \rewritten & cC \alternative *U \\
+		U & \rewritten & rC \alternative / \alternative /F \\
+		F & \rewritten & aF
+	\end{grammar}
+	
+	RegEx: {\tt /\textbackslash*a\textbackslash*/}
+\end{solution}
+
+\question
+	\textbf{\texttt{aab}s and \texttt{bb}s}
+	
+	Given a language $L$ defined over the alphabet $\{\mathtt{a}, \mathtt{b}\}$ defined recursively as follows:
+	\begin{enumerate}
+		\item $\varepsilon \in L$.
+		\item If $x \in L$ then $\mathtt{aab}x \in L$ and $x\mathtt{bb} \in L$.
+		\item Nothing else is in $L$.
+	\end{enumerate}
+	
+	Please answer the following questions concerning $L$:
+	\begin{parts}
+		\item Draw the state diagram of the DFA parsing strings of this language.
+		\begin{solution}
+			We start by denoting a few first strings, which are part of the language.
+			
+			\begin{tabular}{cccccccc}
+				\multicolumn{8}{c}{$\varepsilon$} \\
+				\multicolumn{4}{c}{$aab$} & \multicolumn{4}{c}{$bb$} \\
+				\multicolumn{2}{c}{$aabaab$} & \multicolumn{2}{c}{$aabbb$} & \multicolumn{2}{c}{$aabbb$} & \multicolumn{2}{c}{$bbbb$} \\
+				$aabaabaab$ & $aabaabbb$ & $aabaabbb$ & $aabbbbb$ & $aabaabbb$ & $aabbbbb$ & $aabbbbb$ $bbbbbb$ 
+			\end{tabular}
+			
+			We see, that the strings could start with a sequence of $aab$s which can be repeated but as soon as we enter in a $bb$, it never goes back to a $aab$.
+		\end{solution}
+		\item Give the regular grammar for $L$.
+		\item Give the regular expression which describes $L$.
+	\end{parts}
+
+\question
+	\textbf{Starts with two 0s}
+
+	Given the following regular language:
+	
+	\begin{tabular}[b]{lcl}
+		$L(G(S))$ & = & $\{\omega \in (0 \mid 1)^* \mid \omega$ starts with two 0s\}
+	\end{tabular}
+
+	\begin{parts}
+		\item Give the state diagram of a DFA which parses this language.
+		\item Give a regular grammar $G(S)$ which describes this language.
+		\item Give a regular expression which describes this language.
+	\end{parts}
+
+	\begin{solution}
+		
+		\begin{grammar}
+			S &\rewritten & 0A \alternative 1E \\
+			A &\rewritten & 0 \alternative 1 \alternative 0F \alternative 1F \\
+			F &\rewritten & 0 \alternative 1 \alternative 0F \alternative 1F \\
+			E &\rewritten & 0E \alternative 1E
+		\end{grammar}
+		
+		RegEx: {\tt 00(0|1)*}
+		
+	\end{solution}
+	
+\question
+	\textbf{Ends with 00 or 01}
+
+	Given the following regular language:
+	\begin{tabular}[b]{lcl}
+		$L(G(S))$ & = & $\{\omega \in (0 \mid 1)^* \mid \omega$ ends with 00 or 01\}
+	\end{tabular}
+
+	\begin{parts}
+		\item Give the state diagram of a DFA which parses this language.
+		\item Give a regular grammar $G(S)$ which describes this language.
+		\item Give a regular expression which describes this language.
+	\end{parts}
+	
+	\begin{otherlanguage}{german}
+		Geben sei obige reguläre Sprache $L(G(S))$.
+		
+		\begin{parts}
+			\item Zeichnen Sie das Zustandsdiagramm eines DFA, der diese Sprache erkennt.
+			\item Geben Sie die reguläre Grammatik $G(S)$ für diese Sprache an.
+			\item Geben Sie den regulären Ausdruck für diese Sprache an.
+		\end{parts}
+	\end{otherlanguage}
+
+	\begin{solution}
+	\begin{parts}
+		\part See grammar below
+		\part
+		
+		\begin{grammar}
+		S & \rewritten & 1S \alternative 0P \\
+		P & \rewritten & 0 \alternative 0Z \alternative 1 \alternative 1E\\
+		Z & \rewritten & 0 \alternative 0Z \alternative 1 \alternative 1E \\
+		E & \rewritten & 0P \alternative 1S\\
+		\end{grammar}
+		
+		\part $(0 \mid 1)^*(01 \mid 00)$
+	\end{parts}
+	\end{solution}
+
+\question
+	\textbf{$4i + 1 b$'s}
+	Given the following regular language:
+	
+	\begin{tabular}[b]{lcl}
+		$L(G(S))$ & = & $\{\omega \in (a \mid b \mid c)^* \mid \omega$ has $4i + 1 b$'s ($i \geq 0$)\}
+	\end{tabular}
+
+	\begin{parts}
+		\item Give the state diagram of a DFA which parses this language.
+		\item Give a regular grammar $G(S)$ which describes this language.
+		\item Give a regular expression which describes this language.		
+	\end{parts}
+	
+	\begin{solution}
+	
+	\begin{grammar}
+		S & \rewritten &  \alternative aS \alternative b \alternative bA \alternative cS \\
+		A & \rewritten & a \alternative c \alternative aA \alternative cA \alternative bB \\
+		B & \rewritten & aB \alternative cB \alternative bC \\
+		C & \rewritten & aC \alternative cC \alternative bD \\
+		D & \rewritten & aD \alternative cD \alternative b \alternative bF \\
+		F & \rewritten & a \alternative c \alternative aF \alternative cF \alternative bB
+	\end{grammar}
+	
+	RegEx: {\tt (a|c)*b((a|c)*(bbbb)*(a|c)*)*}
+	
+	\end{solution}
+
+\question \textbf{No $bbb$}
+	Given the following regular language:
+	
+	\begin{tabular}[b]{lcl}
+		$L(G(S))$ & = & $\{\omega \in (a \mid b)^* \mid \omega$ does {\em not} contain the substring $bbb\}$
+	\end{tabular}
+
+	\begin{parts}
+		\item Give the state diagram of a DFA which parses this language.
+
+		\item Give a regular grammar $G(S)$ which describes this language.
+		
+	\end{parts}
+	
+	\begin{otherlanguage}{german}
+		Gegeben sei oben genannte reguläre Sprache.
+		
+		\begin{parts}
+		\item Zeichnen Sie das Zustandsdiagramm eines DFA, der diese Sprache erkennt.
+
+		\item Geben Sie die reguläre Grammatik $G(S)$ für diese Sprache an.
+		
+	\end{parts}
+
+	\end{otherlanguage}
+
+	\begin{solution}
+		
+		\begin{grammar}
+			S & \rewritten & $\varepsilon$ \alternative a \alternative aF \alternative b \alternative bD \\
+			F & \rewritten & a \alternative aF \alternative b \alternative bD \\
+			D & \rewritten & a \alternative aF \alternative b \alternative bR \\
+			R & \rewritten & a \alternative aF \alternative bE \\
+			E & \rewritten & aE \alternative bE
+		\end{grammar}
+		
+	\end{solution}
+	
+\end{questions}
+\end{document}

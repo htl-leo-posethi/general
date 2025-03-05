@@ -73,3 +73,12 @@ In this unit we will get a first contact with formal languages. We gained alread
 
 Class Material:
 - [Handout](./Unit08_FormalLanguagesBasics/01_Lecture/01_Terminology_lecture.pdf)
+- [Graded Exercise](./Unit08_FormalLanguagesBasics/02_Exercises/180228_ExerciseFormalLanguages.pdf)
+- [More Training Examples](./Unit08_FormalLanguagesBasics/03_MoreExamples/02_Terminology_exercises.pdf)
+
+### Unit 9 - Regular Languages and Deterministic Finite Automata
+In this unit we will discuss a specific class of formal languages, namely regular languages. This type of language is especially useful when it comes to checking validity of e-mail addresses, date or time formats, and other text patterns.
+
+Class Material:
+- [Handout](./Unit09_RegularLanguagesDFA/)
+- [Graded Exercise and Further Training Examples](./Unit09_RegularLanguagesDFA/02_Exercises/RegularLanguages.pdf): we discuss the examples a, b, c, and d for the graded exercise. All other examples can be used to prepare for tests and quizzes.
