@@ -1,0 +1,462 @@
+\documentclass{beamer}
+%%% BEGIN PREAMBLE
+
+\usepackage{amsthm}
+\usepackage{tikz}
+\usetikzlibrary{automata, arrows.meta, positioning}
+\usepackage{listings}
+% \usepackage{beamerthemesplit} // Activate for custom appearance
+
+% Definitions
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\emptystring}{\varepsilon}
+% \newcommand{\length}[1]{\mid #1 \mid}
+% \newcommand{\directlygenerates}{\Rightarrow}
+% \newcommand{\generates}{\Rightarrow^{+}}
+% \newcommand{\generatesequal}{\Rightarrow^{*}}
+
+\newenvironment{grammar}
+	{\begin{tabular}[b]{lcl}}
+	{\end{tabular}}
+\newcommand{\rewritten}{$\to$}
+\newcommand{\alternative}{$\mid$\;}
+
+% Title stuff
+\title{Regular Languages}
+\author{Peter Bauer}
+\date{V\_01.02.00}
+
+%%% BEGIN DOCUMENT
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+	\frametitle{Outline}
+	\tableofcontents
+\end{frame}
+
+\section {Motivation}
+\begin{frame}
+	\frametitle{Motivation}
+	
+	\begin{itemize}
+		\item Simplest type of grammar
+		\item Applications in pattern matching
+		\item Implementations
+		\begin{itemize}
+			\item lex / flex
+			\item In editors for searching (vi, emacs, ...)
+			\item In many scripting languages (Perl, Python, JavaScript, ...)
+			\item In frameworks like .NET ({\tt System.Text.RegularExpressions}) or Java ({\tt java.util.regex})
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\section{Definitions}
+\subsection {Regular Grammar}
+\begin{frame}
+	\frametitle{Regular Grammar}
+	\begin{definition}
+		A grammar $G$ is called a {\em regular grammar} if it has only rules of the form
+		\begin{itemize}
+			\item $A$ \rewritten $\alpha$,
+			\item $A$ \rewritten $\alpha B$,
+		\end{itemize}
+		where $A, B \in V_N$ and $\alpha \in V_T$.
+	\end{definition}
+	
+	\pause
+	
+	\begin{remark}
+		$G$ may also have the rule $S$ \rewritten $\varepsilon$ if $S$ does not appear on the right side of the grammar.
+	\end{remark}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Reverse Regular Grammar}
+	\begin{definition}
+		A grammar is called a {\em reverse regular grammar} if it has only rules of the form $A$ \rewritten $\alpha$ or
+		$A$ \rewritten $B \alpha$, where $A, B \in V_N$ and $\alpha \in V_T$.
+	\end{definition}
+	
+	\pause
+	
+	\begin{remark}
+		$G$ may also have the rule $S$ \rewritten $\varepsilon$ if $S$ does not appear on the right side of the grammar.
+	\end{remark}
+\end{frame}
+
+\begin{frame}
+	\frametitle{An Example}
+	\begin{example}
+		The following regular grammar describes a simple form of an identifier. $c$ is a terminal class
+		of characters and $d$ is a terminal class of digits.
+		
+		\begin{grammar}
+			$S$ & \rewritten & $c$ \alternative $cR$\\
+			$R$ & \rewritten & $c$ \alternative $d$ \alternative $cR$ \alternative $dR$
+		\end{grammar}
+	\end{example}
+\end{frame}
+
+\subsection{Regular Language}
+\begin{frame}
+	\frametitle{Regular Language}
+	\begin{definition}
+		The language $L(G(S))$ of a regular grammar $G$ is a {\em regular language} over an alphabet $\Sigma$ and is defined as follows:
+		\begin{itemize}
+			\pause
+			\item The empty set $\Phi$ is a regular language.
+			\pause
+			\item The set with the empty string $\{\emptystring \}$ is a regular language.
+			\pause
+			\item For each $\omega \in \Sigma$ the language $\{\omega\}$ is a regular language.
+			\pause
+			\item If $A$ and $B$ are regular languages, then $A \cup B$, $AB$ (concatenation), and $A^*$ (Kleene star) are
+			regular languages.
+			\pause
+			\item No other language over $\Sigma$ is a regular language.
+		\end{itemize}
+	\end{definition}
+\end{frame}
+
+\subsection{Regular Set}
+\begin{frame}
+	\frametitle{Regular Set}
+
+	\begin{definition}
+		Analogously to regular languages we can define {\em regular sets} as follows:
+		\begin{itemize}
+			\item $\Phi$,  $\{\emptystring \}$, and $\{\omega\}$ for each $\omega \in \Sigma$ are regular sets.
+			\item If $A$ and $B$ are regular sets, then $A \cup B = \{\alpha \mid \alpha \in A \lor \alpha \in B\}$,
+			$AB = \{\alpha \beta \mid \alpha \in A \land \beta \in B\}$,
+			and $A^* = \underset{n \ge 0}{\bigcup}P_n$ are regular sets.
+			\item Nothing else is a regular set.
+		\end{itemize}
+	\end{definition}
+
+	\pause
+	
+	\begin{example}
+	Let $V = \{\mathtt{c}, \mathtt{d}\}$ be a set where $\mathtt{c}$ stands for a character and $\mathtt{d}$ stands for a digit.
+	$\{c\} (\{c\} \cup \{d\})^*$ is a regular set that describes a simple form of identifier.
+	\end{example}
+\end{frame}
+
+\subsection{Regular Expression}
+\begin{frame}
+	\frametitle{Regular Expression}
+	Regular expression describe regular sets by
+	\begin{itemize}
+		\item Omitting the curled brackets
+		\item Writing $+$ instead of $\cup$
+	\end{itemize}
+	
+	\pause
+	
+	\begin{remark}
+		\begin{itemize}
+			\item To avoid parentheses the following priority is assumed:
+			\begin{enumerate}
+				\item Kleene star has the highest priority
+				\item Concatenation has the second highest priority
+				\item $+$ has the lowest priority 
+			\end{enumerate}
+			
+			\item Sometimes $\mid$ is used instead of $+$
+		\end{itemize}
+	\end{remark}
+	
+	\pause
+	
+	\begin{example}
+		The identifier example from above would boil down to $\mathtt{c}(\mathtt{c}+\mathtt{d})^*$.
+	\end{example}
+\end{frame}
+
+\section{Finite Automata}
+\subsection{Deterministic Finite Automaton (DFA)}
+\begin{frame}
+	\frametitle{Deterministic Finite Automaton -- DFA}
+	\begin {definition}
+	A {\em Deterministic Finite Automaton} (DFA) is a quintuple $(Q, \Sigma, \delta, q_0, F)$ where
+	\begin {itemize}
+		\item $Q$ is a finite set of states
+		\item $\Sigma$ is a set of inputs
+		\item $\delta: Q \times \Sigma \to Q$ the state transition function
+		\item $q_0$ the start state
+		\item $F \subseteq Q$ the final states
+	\end{itemize}
+	\end{definition}
+	
+	\pause
+	
+	\begin{remark}
+		DFAs are often depicted by means of state diagrams
+	\end{remark}
+\end{frame}
+
+\begin{frame}
+	\frametitle{State Diagrams}
+	\begin{itemize}
+		\item $Q = \{A, B\}$
+		\item $\Sigma = \{0, 1\}$
+		\item $\delta(A, 1) = B, \delta(B, 0) = B$
+		\item $q_0 = A$
+		\item $F = \{B\}$
+	\end{itemize}
+	
+	\pause
+	
+	\begin{center}
+		\begin{tikzpicture}[node distance = 3cm, on grid, auto]
+		%\draw[help lines] (-1,1) grid (3,-1);
+		\node (A)[state, initial, initial text=] {A};
+		\node (B)[state, right = of A, accepting] {B};
+		\path [-stealth, thick]
+			(A) edge node {1} (B)
+			(B) edge [loop above] node {0} ();
+	\end{tikzpicture}
+\end{center}
+		
+	\pause
+	
+	\begin{itemize}
+		\item States are circles
+		\item Transitions are arrows
+		\item Inputs are labels on the arrows
+		\item Initial states are circles with an arrow from "nowhere"
+		\item Final states are double circles
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Coffee Machine}
+	\begin{itemize}
+		\item Coins of 10, 20 and 50 cents are accepted
+		\item Machine does NOT give change, i.e., if a coin is inserted which would cause an ``overpay'' the coin is thrown into the return tray and the machine doesn't change state.
+		\item After a total amount of 50 cents inserted ``c'' for coffee and ``t'' for tea can be chosen.
+		\item When the machine prepares tea or coffee it is in a state T or C, respectively.
+		\item When the chosen drink is ready the user must press a button ``o'' to open the chamber in order to grab the cup and the machine goes back into its initial state.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{DFA of a Coffee Machine}
+	\begin{center}
+		\begin{tikzpicture}[node distance = 1.8cm, on grid, auto]
+			\node (R)[state, initial, initial text=, accepting] {R};
+			\node (10)[state, right = of R] {10};
+			\node (20)[state, below right = of 10] {20};
+			\node (30)[state, above right = of 10] {30};
+			\node (40)[state, above right = of 20] {40};
+			\node (50)[state, below right = of 40] {50};
+			\node (C)[state, below = of 20, yshift=-.4cm] {C};
+			\node (T)[state, below = of C, yshift=.5cm] {T};
+
+			\path[-stealth, thick]
+				(R) edge node {10} (10)
+				(R) edge [bend right=65] node [below] {50} (50)
+				(10) edge node {10} (20)
+				(10) edge node {20} (30)
+				(10) edge [loop below] node {50} ()
+				(20) edge node {20} (40)
+				(20) edge [loop below] node [right]{50} ()
+				(30) edge [bend right] node {10} (40)
+				(30) edge [loop above] node {50} ()
+				(30) edge [bend left] node {20} (50)
+				(40) edge [bend right] node {10} (50)
+				(40) edge [loop below] node {20, 50} ()
+				(50) edge [loop right] node {10, 20, 50} ()
+				(50) edge [bend left] node {c} (C)
+				(50) edge [bend left] node {t} (T)
+				(C) edge [bend left] node {r} (R)
+				(T) edge [bend left] node {r} (R);
+		\end{tikzpicture}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{DFA Accepting a Simple Identifier}
+	
+	\begin{grammar}
+		$S$ & \rewritten & $c$ \alternative $cR$\\
+		$R$ & \rewritten & $c$ \alternative $d$ \alternative $cR$ \alternative $dR$
+	\end{grammar}
+	
+	\pause
+
+	\begin{center}
+		\begin{tikzpicture}[node distance = 3cm, on grid, auto]
+			\node (S) [state, initial, initial text =] {S};
+			\node (R) [state, accepting, right = of S] {R};
+
+			\path[-stealth, thick]
+				(S) edge node {10} (R)
+				(R) edge [loop] node [above] {c, d} ();
+
+		\end{tikzpicture}			
+	\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{DFA Syntax Check Procedure}
+
+	\begin{itemize}
+		\item \lstinline$checkString$ is a function of a class \lstinline|DFA|
+		\item \lstinline|input| is the string to be checked
+		\item \lstinline|delta| is the state transition function $\delta$
+	\end{itemize}
+
+	\lstset{
+		basicstyle=\scriptsize,
+		keywordstyle=\color{blue},
+		commentstyle=\color{teal},
+		tabsize=2
+	}
+	\begin{lstlisting}[language=Swift]
+func checkString(_ input: String) -> Bool {
+	var currentState: State = initialState
+	var stringIsValid = true
+	for c in input {
+		if let nextState = delta(currentState, c), stringIsValid {
+			// transition exists and we are still on track
+			currentState = nextState
+		} else {
+			stringIsValid = false
+		}
+	}
+	return stringIsValid && finalStates.contains(currentState)
+}
+		\end{lstlisting}	
+\end{frame}
+
+% \subsection{Transformations}
+% \begin{frame}
+% 	\frametitle{Transformation of a DFA to a Regular Expression --- Step 1}
+% 	Replace different transitions from one state to another into one 
+	
+% % 	\begin{VCPicture}{(-2, 0)(6, 4)}
+% % 		\State[q_i]{(2, 1)}{qi}
+% % 		\State[q_j]{(5, 1)}{qj}
+% % 		\ArcL{qi}{qj}{$a$}
+% % 		\ArcR{qi}{qj}{$b$}
+% % 	\end{VCPicture}
+	
+% % 	\begin{VCPicture}{(-2, 0)(6, 3)}
+% % 		\State[q_i]{(2, 1)}{qi}
+% % 		\State[q_j]{(5, 1)}{qj}
+% % 		\ArcL{qi}{qj}{a + b}
+% % 	\end{VCPicture}
+% % \end{frame}
+
+% \begin{frame}
+% 	\frametitle{Transformation of a DFA to a Regular Expression --- Step 2}
+% 	Remove intermediate states 
+	
+% 	% \begin{VCPicture}{(-1, 0)(9, 4)}
+% 	% 	\State[q_i]{(2, 1)}{qi}
+% 	% 	\State[q]{(5, 1)}{q}
+% 	% 	\State[q_j]{(8, 1)}{qj}
+% 	% 	\ArcL{qi}{q}{$a$}
+% 	% 	\LoopN{q}{e}
+% 	% 	\ArcL{q}{qj}{b}
+% 	% 	\ArcL{qj}{q}{c}
+% 	% 	\ArcL{q}{qi}{d}
+% 	% \end{VCPicture}
+	
+% 	% \begin{VCPicture}{(-1, 0)(9, 3)}
+% 	% 	\State[q_i]{(2, 1)}{qi}
+% 	% 	\State[q_j]{(8, 1)}{qj}
+% 	% 	\ArcL{qi}{qj}{ae^*b}
+% 	% 	\ArcL{qj}{qi}{ce^*d}
+% 	% 	\LoopN{qi}{ae^*d}
+% 	% 	\LoopN{qj}{ce^*b}
+% 	% \end{VCPicture}
+% \end{frame}
+
+% \begin{frame}
+% 	\frametitle{Transformation of a DFA to a Regular Expression --- Step 3}
+% 	Remove remaining states 
+	
+% 	% \begin{VCPicture}{(-1, 0)(9, 3)}
+% 	% 	\State[q_i]{(2, 1)}{qi}
+% 	% 	\State[q_j]{(8, 1)}{qj}
+% 	% 	\ArcL{qi}{qj}{r_2}
+% 	% 	\ArcL{qj}{qi}{r_3}
+% 	% 	\LoopN{qi}{r_1}
+% 	% 	\LoopN{qj}{r_4}
+% 	% \end{VCPicture}
+	
+% 	\begin{itemize}
+% 		\item We need $r_1^*r_2$ in any way to go from $q_i$ to $q_j$.
+% 		\item Then we have two possibilities to reach $q_j$ again:
+% 		\begin{itemize}
+% 			\item Either we repeat $r_4$
+% 			\item Or we repeat $r_3r_1^*r_2$
+% 		\end{itemize}
+% 		\item This results in $r_1^*r_2(r_4 + r_3r_1^*r_2)^*$
+% 	\end{itemize}
+% \end{frame}
+
+% \begin{frame}
+% 	\frametitle{Transformation of a Regular Expression to a DFA}
+% 	Given a regular expression $\mathtt{a}$ \alternative $\mathtt{b}$($\mathtt{cc}$* \alternative ($\mathtt{a}$ \alternative $\mathtt{c}$)*)$\mathtt{b}$
+% 		\begin{enumerate}
+% 		\item Subscript each symbol of the regular expression with a unique index:
+% 		$\mathtt{a}_1$ \alternative $\mathtt{b}_2$($\mathtt{c}_3\mathtt{c}_4$* \alternative ($\mathtt{a}_5$  \alternative $\mathtt{c}_6$)*)$\mathtt{b}_7$.
+		
+% 		The indices are the states of the DFA.
+		
+% 		\pause
+		
+% 		\item Create an initial state by adding a state 0 at the very beginning of the expression:
+% 		$_0$($\mathtt{a}_1$ \alternative $\mathtt{b}_2$($\mathtt{c}_3\mathtt{c}_4$* \alternative ($\mathtt{a}_5$  \alternative $\mathtt{c}_6$)*)$\mathtt{b}_7$).
+		
+% 		\item Determine the final states by looking for states which don't require to have a symbol followed. In our example these are the states
+% 		\pause
+% 		1 and 7.
+		
+% 		\pause
+		
+% 		\item Construct a transition matrix by documenting for each state, which symbols may follow and into which subsequent states the automaton will pass. See next slide
+% 	\end{enumerate}
+
+% \end{frame}
+
+% \begin{frame}
+% 	\frametitle{Example Continued}
+% 	$_0$($\mathtt{a}_1$ \alternative $\mathtt{b}_2$($\mathtt{c}_3\mathtt{c}_4$* \alternative ($\mathtt{a}_5$  \alternative $\mathtt{c}_6$)*)$\mathtt{b}_7$).
+	
+% 	\begin{enumerate}
+% 		\item The first transition from 0 is to 1 by reading an {\tt a}. The second transition from 0 is to 2 by reading a {\tt b}. 1 is a final state.
+		
+% 		\pause
+		
+% 		\item The transitions from 2 are to the states 3 (c), 5 (a), 6 (c), and 7 (b).
+		
+% 		\pause
+		
+% 		\item The transitions from 3 are to the states 4 (c) and 7 (b).
+		
+% 		\pause
+		
+% 		\item The transitions from 4 are to 4 (c) and to 7(b).
+		
+% 		\pause
+		
+% 		\item The transitions from 5 are to 5 (a), to 6 (c), and to 7 (b).
+		
+% 		\pause
+		
+% 		\item The transitions from 6 are to 6 (c) to 5 (a), and to 7 (b).
+		
+% 		\pause
+		
+% 		\item 7 is a final state.
+% 	\end{enumerate}
+% \end{frame}
+\end{document}
