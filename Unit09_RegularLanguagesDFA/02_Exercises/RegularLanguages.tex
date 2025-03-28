@@ -45,6 +45,7 @@ IF.04.22 LOAL --- Exercises --- Regular Languages and DFA}}}
 %\makebox[\textwidth]{Name: \enspace\hrulefill}
 
 \begin{questions}
+	\section{Interpreting Regular Expressions}
 \question
 	\textbf{Interpreting a Regular Expression}
 	
@@ -132,6 +133,7 @@ In C, C\# oder Java gibt es die Blockkommentare, welche in \verb$/*$ und \verb$*
 	RegEx: {\tt /\textbackslash*a\textbackslash*/}
 \end{solution}
 
+\section{$a$s and $b$s sometimes $c$s}
 \question
 	\textbf{\texttt{aab}s and \texttt{bb}s}
 	
@@ -161,6 +163,74 @@ In C, C\# oder Java gibt es die Blockkommentare, welche in \verb$/*$ und \verb$*
 		\item Give the regular expression which describes $L$.
 	\end{parts}
 
+	\question
+	\textbf{$4i + 1 b$'s}
+	Given the following regular language:
+	
+	\begin{tabular}[b]{lcl}
+		$L(G(S))$ & = & $\{\omega \in (a \mid b \mid c)^* \mid \omega$ has $4i + 1 b$'s ($i \geq 0$)\}
+	\end{tabular}
+
+	\begin{parts}
+		\item Give the state diagram of a DFA which parses this language.
+		\item Give a regular grammar $G(S)$ which describes this language.
+		\item Give a regular expression which describes this language.		
+	\end{parts}
+	
+	\begin{solution}
+	
+	\begin{grammar}
+		S & \rewritten &  \alternative aS \alternative b \alternative bA \alternative cS \\
+		A & \rewritten & a \alternative c \alternative aA \alternative cA \alternative bB \\
+		B & \rewritten & aB \alternative cB \alternative bC \\
+		C & \rewritten & aC \alternative cC \alternative bD \\
+		D & \rewritten & aD \alternative cD \alternative b \alternative bF \\
+		F & \rewritten & a \alternative c \alternative aF \alternative cF \alternative bB
+	\end{grammar}
+	
+	RegEx: {\tt (a|c)*b((a|c)*(bbbb)*(a|c)*)*}
+	
+	\end{solution}
+
+\question \textbf{No $bbb$}
+	Given the following regular language:
+	
+	\begin{tabular}[b]{lcl}
+		$L(G(S))$ & = & $\{\omega \in (a \mid b)^* \mid \omega$ does {\em not} contain the substring $bbb\}$
+	\end{tabular}
+
+	\begin{parts}
+		\item Give the state diagram of a DFA which parses this language.
+
+		\item Give a regular grammar $G(S)$ which describes this language.
+		
+	\end{parts}
+	
+	\begin{otherlanguage}{german}
+		Gegeben sei oben genannte reguläre Sprache.
+		
+		\begin{parts}
+		\item Zeichnen Sie das Zustandsdiagramm eines DFA, der diese Sprache erkennt.
+
+		\item Geben Sie die reguläre Grammatik $G(S)$ für diese Sprache an.
+		
+	\end{parts}
+
+	\end{otherlanguage}
+
+	\begin{solution}
+		
+		\begin{grammar}
+			S & \rewritten & $\varepsilon$ \alternative a \alternative aF \alternative b \alternative bD \\
+			F & \rewritten & a \alternative aF \alternative b \alternative bD \\
+			D & \rewritten & a \alternative aF \alternative b \alternative bR \\
+			R & \rewritten & a \alternative aF \alternative bE \\
+			E & \rewritten & aE \alternative bE
+		\end{grammar}
+		
+	\end{solution}
+
+	\section{With 0s and 1s}
 \question
 	\textbf{Starts with two 0s}
 
@@ -227,74 +297,6 @@ In C, C\# oder Java gibt es die Blockkommentare, welche in \verb$/*$ und \verb$*
 		
 		\part $(0 \mid 1)^*(01 \mid 00)$
 	\end{parts}
-	\end{solution}
-
-\question
-	\textbf{$4i + 1 b$'s}
-	Given the following regular language:
-	
-	\begin{tabular}[b]{lcl}
-		$L(G(S))$ & = & $\{\omega \in (a \mid b \mid c)^* \mid \omega$ has $4i + 1 b$'s ($i \geq 0$)\}
-	\end{tabular}
-
-	\begin{parts}
-		\item Give the state diagram of a DFA which parses this language.
-		\item Give a regular grammar $G(S)$ which describes this language.
-		\item Give a regular expression which describes this language.		
-	\end{parts}
-	
-	\begin{solution}
-	
-	\begin{grammar}
-		S & \rewritten &  \alternative aS \alternative b \alternative bA \alternative cS \\
-		A & \rewritten & a \alternative c \alternative aA \alternative cA \alternative bB \\
-		B & \rewritten & aB \alternative cB \alternative bC \\
-		C & \rewritten & aC \alternative cC \alternative bD \\
-		D & \rewritten & aD \alternative cD \alternative b \alternative bF \\
-		F & \rewritten & a \alternative c \alternative aF \alternative cF \alternative bB
-	\end{grammar}
-	
-	RegEx: {\tt (a|c)*b((a|c)*(bbbb)*(a|c)*)*}
-	
-	\end{solution}
-
-\question \textbf{No $bbb$}
-	Given the following regular language:
-	
-	\begin{tabular}[b]{lcl}
-		$L(G(S))$ & = & $\{\omega \in (a \mid b)^* \mid \omega$ does {\em not} contain the substring $bbb\}$
-	\end{tabular}
-
-	\begin{parts}
-		\item Give the state diagram of a DFA which parses this language.
-
-		\item Give a regular grammar $G(S)$ which describes this language.
-		
-	\end{parts}
-	
-	\begin{otherlanguage}{german}
-		Gegeben sei oben genannte reguläre Sprache.
-		
-		\begin{parts}
-		\item Zeichnen Sie das Zustandsdiagramm eines DFA, der diese Sprache erkennt.
-
-		\item Geben Sie die reguläre Grammatik $G(S)$ für diese Sprache an.
-		
-	\end{parts}
-
-	\end{otherlanguage}
-
-	\begin{solution}
-		
-		\begin{grammar}
-			S & \rewritten & $\varepsilon$ \alternative a \alternative aF \alternative b \alternative bD \\
-			F & \rewritten & a \alternative aF \alternative b \alternative bD \\
-			D & \rewritten & a \alternative aF \alternative b \alternative bR \\
-			R & \rewritten & a \alternative aF \alternative bE \\
-			E & \rewritten & aE \alternative bE
-		\end{grammar}
-		
-	\end{solution}
-	
+	\end{solution}	
 \end{questions}
 \end{document}
