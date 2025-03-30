@@ -334,129 +334,149 @@ func checkString(_ input: String) -> Bool {
 		\end{lstlisting}	
 \end{frame}
 
-% \subsection{Transformations}
-% \begin{frame}
-% 	\frametitle{Transformation of a DFA to a Regular Expression --- Step 1}
-% 	Replace different transitions from one state to another into one 
+\subsection{Transformations}
+\begin{frame}
+	\frametitle{Transformation of a DFA to a Regular Expression --- Step 1}
+	Replace different transitions from one state to another into one 
 	
-% % 	\begin{VCPicture}{(-2, 0)(6, 4)}
-% % 		\State[q_i]{(2, 1)}{qi}
-% % 		\State[q_j]{(5, 1)}{qj}
-% % 		\ArcL{qi}{qj}{$a$}
-% % 		\ArcR{qi}{qj}{$b$}
-% % 	\end{VCPicture}
-	
-% % 	\begin{VCPicture}{(-2, 0)(6, 3)}
-% % 		\State[q_i]{(2, 1)}{qi}
-% % 		\State[q_j]{(5, 1)}{qj}
-% % 		\ArcL{qi}{qj}{a + b}
-% % 	\end{VCPicture}
-% % \end{frame}
+	\begin{center}
+		\begin{tikzpicture}[->, >=stealth, node distance=3cm, on grid, auto]
+			\node[state] (qi) {$q_i$};
+			\node[state, right of=qi] (qj) {$q_j$};
+		
+			\path (qi) edge[bend left] node[above] {$a$} (qj)
+					edge[bend right] node[below] {$b$} (qj);
+		\end{tikzpicture}
+	  
+		\vspace{2em}
 
-% \begin{frame}
-% 	\frametitle{Transformation of a DFA to a Regular Expression --- Step 2}
-% 	Remove intermediate states 
-	
-% 	% \begin{VCPicture}{(-1, 0)(9, 4)}
-% 	% 	\State[q_i]{(2, 1)}{qi}
-% 	% 	\State[q]{(5, 1)}{q}
-% 	% 	\State[q_j]{(8, 1)}{qj}
-% 	% 	\ArcL{qi}{q}{$a$}
-% 	% 	\LoopN{q}{e}
-% 	% 	\ArcL{q}{qj}{b}
-% 	% 	\ArcL{qj}{q}{c}
-% 	% 	\ArcL{q}{qi}{d}
-% 	% \end{VCPicture}
-	
-% 	% \begin{VCPicture}{(-1, 0)(9, 3)}
-% 	% 	\State[q_i]{(2, 1)}{qi}
-% 	% 	\State[q_j]{(8, 1)}{qj}
-% 	% 	\ArcL{qi}{qj}{ae^*b}
-% 	% 	\ArcL{qj}{qi}{ce^*d}
-% 	% 	\LoopN{qi}{ae^*d}
-% 	% 	\LoopN{qj}{ce^*b}
-% 	% \end{VCPicture}
-% \end{frame}
+		\begin{tikzpicture}[->, >=stealth, node distance=3cm, on grid, auto]
+			\node[state] (qi) {$q_i$};
+			\node[state, right of=qi] (qj) {$q_j$};
+		  
+			\path (qi) edge[bend left] node[above] {$a + b$} (qj);
+		\end{tikzpicture}	
+	\end{center}
+\end{frame}
 
-% \begin{frame}
-% 	\frametitle{Transformation of a DFA to a Regular Expression --- Step 3}
-% 	Remove remaining states 
+\begin{frame}
+	\frametitle{Transformation of a DFA to a Regular Expression --- Step 2}
+	Remove intermediate states 
 	
-% 	% \begin{VCPicture}{(-1, 0)(9, 3)}
-% 	% 	\State[q_i]{(2, 1)}{qi}
-% 	% 	\State[q_j]{(8, 1)}{qj}
-% 	% 	\ArcL{qi}{qj}{r_2}
-% 	% 	\ArcL{qj}{qi}{r_3}
-% 	% 	\LoopN{qi}{r_1}
-% 	% 	\LoopN{qj}{r_4}
-% 	% \end{VCPicture}
+	\begin{center}
+		\begin{tikzpicture}[->, >=stealth, node distance=2.5cm]
+			\node[state] (qi) {$q_i$};
+			\node[state, right of=qi] (q) {$q$};
+			\node[state, right of=q] (qj) {$q_j$};
+		
+			\path[draw=red]
+				(qi) edge[bend left] node[above] {$a$} (q)
+				(q) edge[loop above] node {$e$} (q)
+				(q) edge[bend left] node[above] {$b$} (qj);
+			\path[draw=blue]
+				(qj) edge[bend left] node[below] {$c$} (q)
+				(q) edge[bend left=50] node[below] {$d$} (qi);
+		\end{tikzpicture}
+			
+		\vspace{2em}
+
+		\begin{tikzpicture}[->, >=stealth, node distance=5cm]
+			\node[state] (qi) {$q_i$};
+			\node[state, right of=qi] (qj) {$q_j$};
+		
+			\path[draw=red]
+				(qi) edge[bend left] node[above] {$ae^*b$} (qj);
+			\path
+				(qj) edge[bend left] node[below] {$ce^*d$} (qi)
+				(qi) edge[loop above] node {$ae^*d$} (qi)
+				(qj) edge[loop above] node {$ce^*b$} (qj);
+		\end{tikzpicture}
+	\end{center}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Transformation of a DFA to a Regular Expression --- Step 3}
+	Remove remaining states 
 	
-% 	\begin{itemize}
-% 		\item We need $r_1^*r_2$ in any way to go from $q_i$ to $q_j$.
-% 		\item Then we have two possibilities to reach $q_j$ again:
-% 		\begin{itemize}
-% 			\item Either we repeat $r_4$
-% 			\item Or we repeat $r_3r_1^*r_2$
-% 		\end{itemize}
-% 		\item This results in $r_1^*r_2(r_4 + r_3r_1^*r_2)^*$
-% 	\end{itemize}
-% \end{frame}
+	\begin{center}
+		\begin{tikzpicture}[->, >=stealth, node distance=5cm]
+			\node [state] (qi) {$q_i$};
+			\node[state, right of=qi] (qj) {$q_j$};
+		
+			\path (qi) edge[bend left] node[above] {$r_2$} (qj)
+				(qj) edge[bend left] node[below] {$r_3$} (qi)
+				(qi) edge[loop above] node {$r_1$} (qi)
+				(qj) edge[loop above] node {$r_4$} (qj);
+		\end{tikzpicture}
+	\end{center}
 
-% \begin{frame}
-% 	\frametitle{Transformation of a Regular Expression to a DFA}
-% 	Given a regular expression $\mathtt{a}$ \alternative $\mathtt{b}$($\mathtt{cc}$* \alternative ($\mathtt{a}$ \alternative $\mathtt{c}$)*)$\mathtt{b}$
-% 		\begin{enumerate}
-% 		\item Subscript each symbol of the regular expression with a unique index:
-% 		$\mathtt{a}_1$ \alternative $\mathtt{b}_2$($\mathtt{c}_3\mathtt{c}_4$* \alternative ($\mathtt{a}_5$  \alternative $\mathtt{c}_6$)*)$\mathtt{b}_7$.
-		
-% 		The indices are the states of the DFA.
-		
-% 		\pause
-		
-% 		\item Create an initial state by adding a state 0 at the very beginning of the expression:
-% 		$_0$($\mathtt{a}_1$ \alternative $\mathtt{b}_2$($\mathtt{c}_3\mathtt{c}_4$* \alternative ($\mathtt{a}_5$  \alternative $\mathtt{c}_6$)*)$\mathtt{b}_7$).
-		
-% 		\item Determine the final states by looking for states which don't require to have a symbol followed. In our example these are the states
-% 		\pause
-% 		1 and 7.
-		
-% 		\pause
-		
-% 		\item Construct a transition matrix by documenting for each state, which symbols may follow and into which subsequent states the automaton will pass. See next slide
-% 	\end{enumerate}
+	\begin{itemize}
+		\item We need $r_1^*r_2$ in any way to go from $q_i$ to $q_j$.
+		\item Then we have two possibilities to reach $q_j$ again:
+		\begin{itemize}
+			\item Either we repeat $r_4$
+			\item Or we repeat $r_3r_1^*r_2$
+		\end{itemize}
+		\item This results in $r_1^*r_2(r_4 + r_3r_1^*r_2)^*$
+	\end{itemize}
+\end{frame}
 
-% \end{frame}
+\begin{frame}
+	\frametitle{Transformation of a Regular Expression to a DFA}
+	Given a regular expression $\mathtt{a}$ \alternative $\mathtt{b}$($\mathtt{cc}$* \alternative ($\mathtt{a}$ \alternative $\mathtt{c}$)*)$\mathtt{b}$
+		\begin{enumerate}
+		\item Subscript each symbol of the regular expression with a unique index:
+		$\mathtt{a}_1$ \alternative $\mathtt{b}_2$($\mathtt{c}_3\mathtt{c}_4$* \alternative ($\mathtt{a}_5$  \alternative $\mathtt{c}_6$)*)$\mathtt{b}_7$.
+		
+		The indices are the states of the DFA.
+		
+		\pause
+		
+		\item Create an initial state by adding a state 0 at the very beginning of the expression:
+		$_0$($\mathtt{a}_1$ \alternative $\mathtt{b}_2$($\mathtt{c}_3\mathtt{c}_4$* \alternative ($\mathtt{a}_5$  \alternative $\mathtt{c}_6$)*)$\mathtt{b}_7$).
+		
+		\item Determine the final states by looking for states which don't require to have a symbol followed. In our example these are the states
+		\pause
+		1 and 7.
+		
+		\pause
+		
+		\item Construct a transition matrix by documenting for each state, which symbols may follow and into which subsequent states the automaton will pass. See next slide
+	\end{enumerate}
 
-% \begin{frame}
-% 	\frametitle{Example Continued}
-% 	$_0$($\mathtt{a}_1$ \alternative $\mathtt{b}_2$($\mathtt{c}_3\mathtt{c}_4$* \alternative ($\mathtt{a}_5$  \alternative $\mathtt{c}_6$)*)$\mathtt{b}_7$).
+\end{frame}
+
+\begin{frame}
+	\frametitle{Example Continued}
+	$_0$($\mathtt{a}_1$ \alternative $\mathtt{b}_2$($\mathtt{c}_3\mathtt{c}_4$* \alternative ($\mathtt{a}_5$  \alternative $\mathtt{c}_6$)*)$\mathtt{b}_7$).
 	
-% 	\begin{enumerate}
-% 		\item The first transition from 0 is to 1 by reading an {\tt a}. The second transition from 0 is to 2 by reading a {\tt b}. 1 is a final state.
+	\begin{enumerate}
+		\item The first transition from 0 is to 1 by reading an {\tt a}. The second transition from 0 is to 2 by reading a {\tt b}. 1 is a final state.
 		
-% 		\pause
+		\pause
 		
-% 		\item The transitions from 2 are to the states 3 (c), 5 (a), 6 (c), and 7 (b).
+		\item The transitions from 2 are to the states 3 (c), 5 (a), 6 (c), and 7 (b).
 		
-% 		\pause
+		\pause
 		
-% 		\item The transitions from 3 are to the states 4 (c) and 7 (b).
+		\item The transitions from 3 are to the states 4 (c) and 7 (b).
 		
-% 		\pause
+		\pause
 		
-% 		\item The transitions from 4 are to 4 (c) and to 7(b).
+		\item The transitions from 4 are to 4 (c) and to 7(b).
 		
-% 		\pause
+		\pause
 		
-% 		\item The transitions from 5 are to 5 (a), to 6 (c), and to 7 (b).
+		\item The transitions from 5 are to 5 (a), to 6 (c), and to 7 (b).
 		
-% 		\pause
+		\pause
 		
-% 		\item The transitions from 6 are to 6 (c) to 5 (a), and to 7 (b).
+		\item The transitions from 6 are to 6 (c) to 5 (a), and to 7 (b).
 		
-% 		\pause
+		\pause
 		
-% 		\item 7 is a final state.
-% 	\end{enumerate}
-% \end{frame}
+		\item 7 is a final state.
+	\end{enumerate}
+\end{frame}
 \end{document}
