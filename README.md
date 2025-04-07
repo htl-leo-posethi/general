@@ -80,5 +80,5 @@ Class Material:
 In this unit we will discuss a specific class of formal languages, namely regular languages. This type of language is especially useful when it comes to checking validity of e-mail addresses, date or time formats, and other text patterns.
 
 Class Material:
-- [Handout](./Unit09_RegularLanguagesDFA/)
+- [Handout](./Unit09_RegularLanguagesDFA/01_Lectures/01_RegularLanguagesDFA_lecture.pdf)
 - [Graded Exercise and Further Training Examples](./Unit09_RegularLanguagesDFA/02_Exercises/RegularLanguages.pdf): we discuss the examples 1, 5, 7, and 8 for the graded exercise. All other examples can be used to prepare for tests and quizzes.
