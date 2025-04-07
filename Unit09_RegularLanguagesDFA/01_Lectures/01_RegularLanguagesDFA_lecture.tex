@@ -26,7 +26,7 @@
 % Title stuff
 \title{Regular Languages}
 \author{Peter Bauer}
-\date{V\_01.02.00}
+\date{V\_01.03.01}
 
 %%% BEGIN DOCUMENT
 \begin{document}
@@ -259,6 +259,7 @@
 
 			\path[-stealth, thick]
 				(R) edge node {10} (10)
+				(R) edge [bend right=40] node [below] {20} (20)
 				(R) edge [bend right=65] node [below] {50} (50)
 				(10) edge node {10} (20)
 				(10) edge node {20} (30)
@@ -295,7 +296,7 @@
 			\node (R) [state, accepting, right = of S] {R};
 
 			\path[-stealth, thick]
-				(S) edge node {10} (R)
+				(S) edge node {c} (R)
 				(R) edge [loop] node [above] {c, d} ();
 
 		\end{tikzpicture}			
