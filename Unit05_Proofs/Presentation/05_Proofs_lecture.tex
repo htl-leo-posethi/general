@@ -146,4 +146,30 @@ Prove the rule via truth table.
 \end{itemize}
 \end{example}
 \end{frame}
+
+\begin{frame}
+	\frametitle{Proof by Contradiction}
+	\framesubtitle{A Specific Variant}
+	\begin{itemize}
+		\item Sometimes the proposition to be proven is {\bf not} of the form  $A \Rightarrow B$
+		\item Instead only a proposition $S$ is to be proven
+		\item This is a short form of $K \Rightarrow S$, where $K$ is the already proven knowledge or the axioms about the underlying universe of discourse
+		\item In this case it is to proof $K \land \lnot S \Rightarrow \text{{\bf F}}$
+		\item In short: In order to proof $S$ we assume $\lnot S$ and show that this leads to ``absurdity''
+	\end{itemize}
+\end{frame}
+\begin{frame}
+	\frametitle{Proof by Contradiction}
+	\framesubtitle{A Specific Variant}
+	\begin{Example}
+		\begin{itemize}
+			\item $\lnot (\exists n \in \mathbb{N}, \forall i \in \mathbb{N}: i \leq n)$ aka ``There is no greatest natural number''
+			\item We assume $\exists n \in \mathbb{N}, \forall i \in \mathbb{N}: i \leq n$ aka "There is a greatest natural number"
+			\item Lets take a new natural number $k = n + 1$ which exists since $n \in \mathbb{N}$ and adding 1 to $n$ is again a natural number (since $\mathbb{N}$ is closed under +).
+			\item Now we have a new natural number $k > n$ which contradicts our assumption
+			\item Therefore the initial proposition is proven
+		\end{itemize}
+	\end{Example}
+
+\end{frame}
 \end{document}
