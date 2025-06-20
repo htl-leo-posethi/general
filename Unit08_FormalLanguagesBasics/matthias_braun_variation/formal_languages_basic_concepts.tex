@@ -1,0 +1,302 @@
+% Sets the slides' look and contains some custom commands as well as colors
+\input{../../Shared_Latex/custom_rochester.tex}
+\input{../../Shared_Latex/author_and_date.tex}
+
+% Quoting text
+\usepackage{csquotes}
+% Drawing parsing trees
+\usepackage{qtree}
+
+\title{Formal Languages}
+
+\begin{document}
+
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+  \frametitle{Today's Plan}
+  \begin{itemize}
+    \item What's a formal language?
+    \item How can we create our own formal language?
+  \end{itemize}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+  \frametitle{Formal Languages}
+  \framesubtitle{The fuzzy explanation}
+  \begin{itemize}
+    \item A language is a system to express ideas
+    \item Formal languages are a generalization of programming languages
+    \item A formal language has rules that define which sentences (think programs) are allowed
+    \item This allows us to create (programming) languages!
+  \end{itemize}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+  \frametitle{Alphabet}
+  \begin{itemize}
+    \item A formal language has an alphabet
+    \item An alphabet consists of symbols, for example:
+      \begin{itemize}
+        \item A binary alphabet: $\{0,1\}$
+        \item Three-letter alphabet: $\{a,b,c\}$
+        \item Alphabet for a game: \{$\clubsuit$,$\diamondsuit$,$\heartsuit$,$\spadesuit$\}
+          % nucleotides in DNA: guanine, adenine, cytosine and thymine
+        \item Alphabet for DNA: \{G,A,T,C\}
+      \end{itemize}
+    \item We construct \textbf{strings} from the alphabet's symbols: \begin{itemize}
+        \item 11000101011001
+        \item bcababbaac
+        \item $\diamondsuit\spadesuit\heartsuit\heartsuit\clubsuit\spadesuit$
+        \item ATAAAAAACTAG
+    \end{itemize}
+  \end{itemize}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+  \frametitle{Languages are built from Alphabets}
+  \begin{itemize}
+    \item A language built from the alphabet $\{a, b, c\}$:
+      \\
+      $\{aa, cb, baba, cabab\}$
+    \item Another language from the same alphabet:
+      \\
+      $\{ccccc\}$
+    \item Let's concatenate those two languages:
+      \\
+      $\{aa, cb, baba, cabab, ccccc\}$
+    \item Languages are sets of strings
+  \end{itemize}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+  \frametitle{Grammar}
+  \begin{itemize}
+    \item A grammar for English tells us whether a sentence is well formed or not:
+      \begin{itemize}[<.->]
+        \item \enquote{I went skiing}
+        \item \enquote{went skiing I}
+      \end{itemize}
+    \item Using a grammar, we can also \textit{generate} sentences of a language
+    \item An example grammar:
+      \begin{itemize}[<.->]
+        \item[] \texttt{a = "a";}
+        \item[] \texttt{b = "b";}
+        \item[] \texttt{c = "c";}
+        \item[] \texttt{sentence = c, a, b;}
+      \end{itemize}
+    \item Comma means concatenation
+    \item Generated language: $\{cab\}$
+  \end{itemize}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+  \frametitle{More Grammars}
+  \begin{itemize}
+    \item Another grammar:
+      \begin{itemize}
+        \item[] \texttt{subject = "I" | "You" | "We";}
+        \item[] \texttt{verb = "went" | "love" | "hate";}
+        \item[] \texttt{object = "skiing" | "playing chess" | "Mark Ruffalo";}
+        \item[] \texttt{sentence = subject, " ", verb, " ", object;}
+      \end{itemize}
+    \item Some strings of the language generated from this grammar: \begin{itemize}
+        \item \enquote{I love skiing}
+        \item \enquote{You went Mark Ruffalo}
+        \item \enquote{I hate playing chess}
+        \item \enquote{I love playing chess}
+    \end{itemize}
+  \item Vertical bar $|$ means choice ("or")
+  \item How many different strings (sentences) does the language generated from this grammar have?
+  \end{itemize}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+  \frametitle{Grammars, formalized}
+  \begin{itemize}
+    \item A grammar consists of \textbf{productions rules}:\\
+      rule1 = "I" | "You" | "We";\\
+      rule2 = "went" | "love" | "hate";\\
+      rule3 = "skiing" | "playing chess" | "Mark Ruffalo";\\
+      rule4 = rule1, " ", rule2, " ", rule3;
+    \item Production rules define how to generate strings: rule 4 is replaced with rule 1, 2, and 3 (separated by spaces)
+    \item A rule is also called a \textbf{non-terminal} since we haven't finished/terminated replacing them to produce symbols
+    \item A rule is replaced by other rules or a \textbf{terminal} symbol from the languages alphabet
+    \item Terminals can't be replaced by anything else, they are quoted
+    \item The notation we use for our grammars is called \textbf{extended Backus-Naur form} (EBNF)
+  \end{itemize}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+  \frametitle{Formal Languages}
+  \framesubtitle{The formal explanation}
+  \begin{itemize}[<.->]
+    \item A formal language is defined by an alphabet and a grammar
+    \item A formal language is the set of all strings generated from the grammar
+  \end{itemize}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+  \frametitle{Test your knowledge}
+  \begin{itemize}[<.->]
+    \item List all the terminals from the previous grammar
+    \item How many production rules does the grammar have?
+    \item In EBNF, what's the difference between the comma and the vertical bar?
+  \end{itemize}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+  \frametitle{Parse Trees}
+  \begin{itemize}
+    \item Example string: \enquote{We love Mark Ruffalo}
+    \item Parse tree:
+      \\
+      \Tree[.sentence [.subject \textit{We} ] [.verb \textit{love} ] [.object \textit{Mark Ruffalo} ]]
+      \vspace{0.7cm}
+    \item Each leaf is a terminal symbol
+    \item Each interior node is a non-terminal production rule
+  \end{itemize}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+  \frametitle{Recursive Grammars}
+  \begin{itemize}
+    \item All the grammars we've seen so far generate a finite amount of strings
+    \item What about this one:
+      \begin{itemize}[<.->]
+        \item[] \texttt{bit = "0" | "1";}
+        \item[] \texttt{sentence = bit, sentence;}
+      \end{itemize}
+    \item How do we make it stop?
+    \item \texttt{sentence = bit, (sentence | "");}
+  \end{itemize}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+  \frametitle{Your turn}
+  \begin{itemize}[<.->]
+    \item Write a grammar for a language with \textit{exactly} these three strings:\\
+      \{abc, cba, bac\}
+    \item A grammar for a language with an \textit{infinite} number of strings like these:\\
+      \{a, aa, aaa, aaaa, aaaaa, ...\}
+    \item A grammar for a language with an \textit{infinite} number of strings like these:\\
+      \{a, b, aba, ababa, aaaa, ...\}
+  \end{itemize}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+  \frametitle{Grammar for Palindromes}
+  \framesubtitle{Reads the same from left to right and right to left}
+  \begin{itemize}
+    \item We want to create bit palindromes:
+      \begin{itemize}[<.->]
+        \item "0110"
+        \item "11"
+        \item "10101"
+        \item "0"
+        \item ""
+      \end{itemize}
+    \item Start with the non-recursive base cases:
+      \begin{enumerate}
+        \item \texttt{pal = "" | "1" | "0";}
+      \end{enumerate}
+    \item Now the recursive cases:
+      \begin{enumerate}\addtocounter{enumi}{1}
+        \item \texttt{pal = "0", pal, "0";}
+        \item \texttt{pal = "1", pal, "1";}
+      \end{enumerate}
+    \item Let's generate the example palindromes above by replacing \texttt{pal} step-by-step
+  \end{itemize}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+  \frametitle{Grammar for Addition and Subtraction}
+  \begin{itemize}
+    \item Some valid expressions:
+      \begin{itemize}[<.->]
+        \item \enquote{1 + 2}
+        \item \enquote{5}
+        \item \enquote{3 - 1 + 5}
+        \item \enquote{3 - 1 + 5 + 8}
+          % We only support addition and subtraction of single digits
+      \end{itemize}
+    \item Production rules for the base cases:
+      \begin{enumerate}[<.->]
+        \item \texttt{expr = digit;}
+        \item \texttt{digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9";}
+      \end{enumerate}
+    \item Production rules for the recursive cases:
+      \begin{enumerate}\addtocounter{enumi}{2}
+        \item \texttt{expr = expr, " + ", digit;}
+        \item \texttt{expr = expr, " - ", digit;}
+      \end{enumerate}
+    %\item Let's generate \enquote{3 - 1 + 5 + 8} from this grammar, step-by-step
+  \end{itemize}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+  \frametitle{Grammar for Addition and Subtraction}
+  \framesubtitle{Parse Tree for \enquote{3 - 1 + 5 + 8}}
+  \small{Notice how this tree grows down towards the \textit{left} because the recursive part, \texttt{expr}, is on the left-hand side of \fcolorbox{red!20}{yellow}{\texttt{expr, " + ", digit;}} and \\ \fcolorbox{red!20}{yellow}{\texttt{expr, " - ", digit;}}}
+
+  \Tree [.expr [.expr [.expr [.expr [.digit 3 ] ] - [.digit 1 ] ] +  [.digit 5 ] ] + [.digit 8 ] ]
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+  \frametitle{Your turn}
+  \framesubtitle{1 of 2}
+  \begin{itemize}[<.->]
+    \item Generate the following strings from the previous grammar and draw the parse tree. Make a note of the production rule you use in each step:
+      \begin{itemize}[<.->]
+        \item \enquote{1}
+        \item \enquote{1 + 2}
+        \item \enquote{8 + 9 - 0}
+      \end{itemize}
+    \item Write down a grammar for the language of propositional logic (you know: $\lor$, $\land$, $\lnot$, parentheses). You can limit the number of different variables in this language to $a$, $b$, and $c$. The language should contain strings like these:
+      \begin{itemize}[<.->]
+        \item \enquote{$a$}
+        \item \enquote{$a \land b$}
+        \item \enquote{$a \lor \lnot b$}
+        \item \enquote{$a \lor \lnot (b \land c)$}
+        \item \enquote{$a \lor \lnot a$}
+      \end{itemize}
+    \item Hint: You can do this with \textit{two} production rules
+    % F = I | ¬F | (F ∧ F) | (F ∨ F);
+    % I = "a" | "b" | "c";
+  \end{itemize}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+  \frametitle{Your Turn}
+  \framesubtitle{2 of 2}
+  \begin{itemize}[<.->]
+    \item Create a grammar that generates integer numbers larger than 99.
+      % digit    = "0" | "1" | ... | "9";
+      % nonzero  = "1" | ... | "9";
+      % rest     = "" | (digit, rest);
+      % number   = nonzero, digit, digit, rest
+    \item Create a grammar that generates constants in a programming language. The naming convention for constants is that a constant:
+      \begin{itemize}
+        \item starts with an upper-case letter
+        \item only contains upper-case letters and underscores (no digits)
+        \item has at least one letter
+      \end{itemize}
+      % letter   = "A" | "B" | ... | "Z";
+      % rest     = ("_", rest) | (letter, rest) | "";
+      % constant = letter, rest;
+    \item Let's say that a password should contain at least one lowercase letter and a digit. The minimum password length is two, the maximum is infinity. Create a grammar that generates such passwords. Some valid example passwords:
+      \begin{itemize}[<.->]
+        \item \enquote{a0}
+        \item \enquote{9z}
+        \item \enquote{z12ab90zkl}
+        \item \enquote{hunter2}
+      \end{itemize}
+      % letter   = "a" | "b" | ... | "z";
+      % digit    = "0" | "1" | ... | "9";
+      % rest     = (digit, rest) | (letter, rest) | "";
+      % password = (rest, digit, rest, letter, rest) | (rest, letter, rest, digit, rest);
+  \end{itemize}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+
