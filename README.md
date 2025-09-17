@@ -16,7 +16,7 @@ We will get an overview of the course and fix the organizational framework like 
 Class material
 
 - [Handout](Unit01_Organizational/OrganizationalAndOverviewHandout.pdf)
-- [Graded Exercise](https://github.com/htl-leo-posethi/coding-assignment1-gcd.git)
+- [Graded Exercise](https://github.com/htl-leo-posethi/gcd)
 
 ### Unit 2 - Basic Propositional Logic
 We will talk about propositions, their compositions, the properties of these compositions and propositional logic formulas.
