@@ -23,7 +23,7 @@ We will talk about propositions, their compositions, the properties of these com
 
 Class material
 - [Handout](Unit02_BasicPropositionalLogic/Presentation/02_PropositionalLogicBasics_lecture.pdf)
-- [Graded Exercise](Unit02_BasicPropositionalLogic/Exercises/Exercise2.pdf)
+- [Graded Exercise](Unit02_BasicPropositionalLogic/Exercises/GradedExercises/ExercsisesUnit2.pdf)
 - [More examples](Unit02_BasicPropositionalLogic/Exercises/Exercise2MoreExamples/Exercise2MoreExamples.pdf) as training material for quizzes and tests
 
 ### Unit 3 - Minimizing Propositional Formulas
