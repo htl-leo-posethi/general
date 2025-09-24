@@ -1,0 +1,105 @@
+\documentclass[12pt,a4paper]{exam}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman,english]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\begin{document}
+
+\begin{center}
+  {\Large \textbf{POPSETHI — Exercises: Propositional Logic}}
+\end{center}
+
+\begin{questions}
+
+\question {\bf Equivalence of propositional formulas via truth table}
+
+Let $P$ and $Q$ be two propositional formulas as defined below. Show that $P \equiv Q$ holds.
+\[
+\begin{aligned}
+& P = \neg(A \land B) \qquad && Q = \neg A \lor \neg B \\[0.35em]
+& P = \neg(A \lor B) \qquad && Q = \neg A \land \neg B \\[0.35em]
+& P = (A \land B) \lor \neg(A \lor B) \qquad && Q = (A \lor \neg B)\land(\neg A \lor B)
+\end{aligned}
+\]
+
+\question {\bf Discussion}
+
+Analyze the following two sentences. / Analysieren Sie die Struktur der folgenden Sätze.
+\begin{parts}
+  \part Sonntags besuchen wir unsere Freunde und sofern es nicht gerade regnet machen wir eine Wanderung oder eine Radpartie.
+  \part Wenn Anastasia den Most holt wird es bald etwas zu trinken geben und das Abendessen wird beginnen vorausgesetzt dass Bartholomäus das Brot schon gebacken hat.
+\end{parts}
+
+Accomplish the following tasks for both of the above sentences:
+
+\begin{enumerate}
+  \item Find and extract the atomic sentences. These are the sentences which cannot be further simplified through the connections introduced in class (and, or, not, \dots).
+  \item Analyze the structure of the sentence and express the sentence as a propositional logic formula. Note that no commas were deliberately placed. Where would the commas need to be placed so that your formula and the sentence have the same meaning?
+  \item Can you find more than one meaning of this sentence? How would the commas in the sentence and the parentheses in the propositional logic formula need to be placed to express this other meaning?
+\end{enumerate}
+
+{\bf Hints: }
+\begin{itemize}
+  \item An example of an atomic sentence you should find is ``Anastasia holt den Most''
+  \item Before you start to find the formula assign each atomic sentence to a variable, e.g., $A = $ ``Anastasia holt den Most''
+\end{itemize}
+
+\begin{otherlanguage}{german}
+  Erledigen Sie für jeden der obigen Sätze folgende Aufgaben:
+\begin{enumerate}
+  \item Finden und extrahieren Sie die atomaren Sätze. Das sind die Sätze, welche nicht durch die im Unterricht vorgestellten Verknüpfungen (und, oder, nicht, \dots) weiter vereinfacht werden können.
+  \item Analysieren Sie die Struktur des Satzes und drücken Sie den Satz als aussagenlogische Formel aus. Beachten Sie, dass bewusst keine Beistriche gesetzt wurden. Wo würden die Beistriche zu setzen sein, dass Ihre Formel und der Satz die gleiche Bedeutung haben?
+  \item Können Sie mehr als eine Bedeutung dieses Satzes finden? Wie würden die Beistriche im Satz und die Klammern in der aussagenlogischen Formel zu setzen sein, um diese andere Bedeutung auszudrücken?
+\end{enumerate}
+\end{otherlanguage}
+
+{\bf Hinweise: }
+\begin{itemize}
+  \item Ein Beispiel für einen atomaren Satz, den Sie finden sollten, ist ``Anastasia holt den Most''
+  \item Bevor Sie beginnen, die Formel zu finden, ordnen Sie jedem atomaren Satz eine Variable zu, z.B., $A = $ ``Anastasia holt den Most''
+\end{itemize}
+
+\question {\bf Either or but not both}
+
+A new composition $\oplus$ may be defined, where $A \oplus B$ could be read as “either $A$ or $B$ but not both”. The truth table of $\oplus$ is defined as follows:
+\[
+\begin{array}{c@{\quad}c@{\quad}c}
+A & B & A \oplus B\\\hline
+\mathrm{t} & \mathrm{t} & \mathrm{f}\\
+\mathrm{t} & \mathrm{f} & \mathrm{t}\\
+\mathrm{f} & \mathrm{t} & \mathrm{t}\\
+\mathrm{f} & \mathrm{f} & \mathrm{f}
+\end{array}
+\]
+Create a propositional calculus expression using only $\land$ and $\neg$ that is
+equivalent to $A \oplus B$. Prove their equivalence by using truth tables.
+
+\question {\bf Exam Nerves / Prüfungsangst}
+
+Let it be defined: $A =$ "I pass the exam" and $B =$ "I am happy". Formulate the following statements as propositional logic formulas using exclusively the three connectives $\neg$, $\land$ and $\lor$.
+\begin{parts}
+  \part "Neither do I pass the exam nor am I happy"
+  \part "I will definitely pass the exam regardless of whether I am happy"
+  \part "Under no circumstances will I be happy"
+  \part "Either I pass the exam or I am happy"
+  \part "I cannot simultaneously pass the exam and be happy"
+  \part "I will do at least one of the two: pass the exam or be happy"
+\end{parts}
+\vspace{2em}
+Es sei festgelegt: $A =$ „Ich bestehe die Prüfung“ und $B =$ „Ich freue mich“. Formulieren Sie nachfolgende Aussagen in aussagenlogischen Formeln ausschließlich mittels der drei Junktoren $\neg$, $\land$ und $\lor$.
+\begin{parts}
+  \part „Weder bestehe ich die Klausur noch freue ich mich“
+  \part „Auf jeden Fall bestehe ich die Klausur unabhängig davon, ob ich mich freue“
+  \part „Auf keinen Fall freue ich mich“
+  \part „Entweder bestehe ich die Klausur oder ich freue mich“
+  \part „Ich kann nicht zugleich die Klausur bestehen und mich freuen“
+  \part „Ich werde mindestens eins von beidem tun: die Klausur bestehen oder mich freuen“
+\end{parts}
+
+\end{questions}
+
+\end{document}
