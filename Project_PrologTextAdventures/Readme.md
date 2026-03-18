@@ -1,18 +1,23 @@
 # Project - Programming Text Adventures in Prolog
+
 ## Separating the Source Base
+
 In order to structure the source base it is possible to separate the code into different files. To include the content of a file into another file the predicate `include/1` is used. Example:
 
 ```Prolog
 :- include('Library.pl').
 ```
+
 This command replaces the above given line by the source text of `Library.pl`. This is similar as the `#include <...>` you know from C. Take care that Prolog does not provide a mechanism to prevent multiple includes. One has to track this manually.
 
 ## Debugging
+
 The more complex programs grow the more important is to see how they are executed. Prolog can be turned into debugging mode by calling the predicate `trace/0`. In this mode the execution of predicates is shown step by step. Next step is shown by hitting return. A debug run of a predicate can be aborted by hitting `a`.
 
 To turn off debugging mode the predicate `notrace/0` must be called.
 
 ## Managing Data aka Dynamic Predicates
+
 We have seen that a Prolog program is a logicbase of predicates, and so far we have entered clauses for those predicates directly in our programs. Prolog also allows us to manipulate the logicbase directly and provides built-in predicates to perform this function. The main ones are:
 
 **asserta(X):** Adds the clause X as the first clause for its predicate. Like the other I/O predicates, it always fails on backtracking and does not undo its work.
@@ -31,11 +36,13 @@ setNewLocation(Location) :-
     retract(player(_, _, _)), % remove current definition of player
     asserta(player('john doe', Location, CurrentHealth)). % add definition of player with new location
 ```
+
 Note that we have to declare the predicate `player/3` to be dynamic (first line) to be able to use `asserta/1`, `assertz/1` or `retract/1`.
 
 ## Fail
 
 ## Cut
+
 Sometimes it is desirable to selectively turn off backtracking. Prolog provides a predicate that performs this function. It is called the cut, represented by an exclamation mark (!).
 
 The cut effectively tells Prolog to freeze all the decisions made so far in this predicate. That is, if required to backtrack, it will automatically fail without trying other alternatives.
@@ -48,6 +55,7 @@ max(X, Y, X) :-
 
 max(X, Y, Y).
 ```
+
 When querying `max(3, 5, Z).` no harm can be detected since the first definition fails (`X >= Y` fails and therefore the whole predicate fails). Due to backtracking the second definition is called which gives the expected result.
 
 `max(5, 3, Z).` however behaves harmfully. We get the correct result `Z = 5` (by evaluating the first definition) but it keeps stuck in backtracking and also evaluates the second definition which results in `Z = 3` which does not make sense.
@@ -55,23 +63,28 @@ When querying `max(3, 5, Z).` no harm can be detected since the first definition
 In this case we have to prevent Prolog from backtracking which is done by the cut. We end up in a definition as shown in [Cut.pl](./Cut.pl).
 
 ## Random Numbers
+
 - Initialize the random number generator by calling `randomize/1` at the beginning of a program
 - `random/3` generates a random number. In particular `random(Base, Limit, Number)` tries to unify `Number` such that it is between `Base` and `Limit`.
 
 ## Arithmetic
+
 - To "assign" a value to a variable we use `is/2`. You should be already familiar with. `X is N1 + N2` succeeds if it can unify `X` with `N1 + N2`. Of course, other expressions than `+` could be used.
--  `=:=/2` checks whether two expressions are equal. `RandomNumber =:= 2` succeeds if `RandomNumber` is equal to `2`. Analogously the following predicates can be used:
-   -  `=\=` for unequal
-   -  `<` for smaller
-   -  `<=` for at most
-   -  `>=` for at least
-   -  `>` for greater
+- `=:=/2` checks whether two expressions are equal. `RandomNumber =:= 2` succeeds if `RandomNumber` is equal to `2`. Analogously the following predicates can be used:
+  - `=\=` for unequal
+  - `<` for smaller
+  - `<=` for at most
+  - `>=` for at least
+  - `>` for greater
 
 ## Other Stuff
+
 ### Emojis
-... can be found under: https://1000logos.net/emoji-copy-and-paste/
+
+... can be found under: <https://1000logos.net/emoji-copy-and-paste/>
 
 ### Formatted Output
+
 Instead of consecutive calls of `write/1` it is more convenient to use the pre-defined `format/2` clause. `format("~w and ~w are forbidden to take~n", [Object1, Object2])` is equivalent to
 
 ```Prolog
@@ -80,6 +93,8 @@ write(' are forbidden to take'), nl
 ```
 
 ## Playground
+
+You can find a playground for testing the above mentioned features in the [text-adventure-template repository](https://github.com/htl-leo-posethi/text-adventure-template). You may fork and clone this repo and play around with the code. The following is an example of how to start the game and place an enemy in the player's location:
 
 ```Prolog
 > cd GameTemplate
