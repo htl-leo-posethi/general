@@ -42,10 +42,11 @@ public class RegEx {
         // Pattern "bauer" to be matched in "bauer", "peter bauer"
         // Show that Matcher.find() is not idempotent
 //        Pattern p = Pattern.compile("ba[ui]er");
-//        Matcher m = p.matcher("peter bauer");
+//        Matcher m = p.matcher("peter bauer and mary baier");
 //        System.out.println("Pattern found: " + m.find());
-//        System.out.println("Patter found: " + m.group());
+//        System.out.println("Pattern found: " + m.group());
 //        System.out.println("Pattern starts at: " + m.start());
+//        System.out.println("Another pattern found: " + m.find());
 
         // Example 2
         // Match example from last exercise
@@ -59,11 +60,16 @@ public class RegEx {
         // Example 4
         // Character classes with ranges, e.g., [a-zA-Z]
         // Use string "Burma" and then "8urma"
+//        Pattern p = Pattern.compile("^[A-Za-z0-9]urma");
+//        Matcher m = p.matcher("Burma is the old name of Myanmar");
+//        System.out.println(m.find());
+//        System.out.printf(m.group());
+
 
         // Example 5
         // Predefined character classes
         // Any character ".", digits (\d), non-digits (\D), white space (\s)
-        // non white space (\S), word (\w) and non words (\W)
+        // non white space (\S), word (\w) and non-words (\W)
         // Show that the escape character has to be double escaped in a string
         // Use the example from the slides: "text[\w\s]*important" on "Hey there, I am texting you some important news: DON’T PANIC!"
         // Use string "8irma" and try the above given classes
@@ -74,10 +80,18 @@ public class RegEx {
 
         // Example 6
         // Quantifiers: ? (optional), {n} (repeat n times), {m,n} (repeat at
-        // least m and at most n times
-        Pattern p = Pattern.compile("</?p>");
-        Matcher m = p.matcher("</p>");
-        System.out.println("Pattern found: " + m.find());
+        // least m and at most n times)
+        // ?: find a specific html tag but no matther whether its an opening or closing tag
+        // {n}: Hex color code #AAB35F
+        // {n, m}: Passwords that may contain between 8 and 15 characters
+//        Pattern p = Pattern.compile("</?p>");
+//        Matcher m = p.matcher("</p>");
+//        System.out.println("Pattern found: " + m.find());
+//        System.out.println("Pattern: " + m.group());
+
+        Matcher matcher = Pattern.compile("^#[0-9A-F]{6}$")
+                .matcher("#AAB35F");
+        System.out.println(matcher.find());
 
     }
 
